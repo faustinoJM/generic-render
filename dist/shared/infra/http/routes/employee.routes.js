@@ -1,0 +1,26 @@
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.employeeRouter = void 0;
+const express_1 = require("express");
+const CreateEmployeeController_1 = require("../../../../modules/employees/useCases/createEmployee/CreateEmployeeController");
+const DeleteEmployeeController_1 = require("../../../../modules/employees/useCases/deleteEmployee/DeleteEmployeeController");
+const ListEmployeeController_1 = require("../../../../modules/employees/useCases/listEmployee/ListEmployeeController");
+const SingleEmployeeController_1 = require("../../../../modules/employees/useCases/singleEmployee/SingleEmployeeController");
+const UpdateEmployeeController_1 = require("../../../../modules/employees/useCases/updateEmployee/UpdateEmployeeController");
+const ensureAuthenticated_1 = __importDefault(require("../middlewares/ensureAuthenticated"));
+const employeeRouter = (0, express_1.Router)();
+exports.employeeRouter = employeeRouter;
+const createEmployeeController = new CreateEmployeeController_1.CreateEmployeeController();
+const listEmployeeController = new ListEmployeeController_1.ListEmployeeController();
+const singleEmployeeController = new SingleEmployeeController_1.SingleEmployeeController();
+const deleteEmployeeController = new DeleteEmployeeController_1.DeleteEmployeeController();
+const updateEmployeeController = new UpdateEmployeeController_1.UpdateEmployeeController();
+employeeRouter.use(ensureAuthenticated_1.default);
+employeeRouter.post("/", createEmployeeController.handle);
+employeeRouter.get("/", listEmployeeController.handle);
+employeeRouter.get("/:id", singleEmployeeController.handle);
+employeeRouter.delete("/:id", deleteEmployeeController.handle);
+employeeRouter.put("/:id", updateEmployeeController.handle);
