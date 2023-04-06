@@ -1,5 +1,4 @@
-import { ISalario } from "../useCases/createPayroll/CreatePayrollUseCase";
-import { IPayrollDemo } from "../useCases/listPayroll/ListPayrollUseCase";
+import { ISalario,IPayrollDemo } from "../useCases/createPayroll/CreatePayrollUseCase";
 
 
 interface ICreatePayrollDTO2 {
