@@ -5,7 +5,6 @@ import { InputPayrollController } from "../../../../modules/payrolls/useCases/in
 import { OutputPayrollController } from "../../../../modules/payrolls/useCases/ListOutputPayroll/OutputPayrollController";
 import { SinglePayrollController } from "../../../../modules/payrolls/useCases/singlePayroll/SinglePayrollController";
 import exceljs from "exceljs"
-import { ExportExcelPayrollController } from "../../../../modules/payrolls/useCases/exportExcelPayroll/ExportExcelPayrollController";
 import { ListInputPayrollController } from "../../../../modules/payrolls/useCases/ListInputPayroll/ListInputPayrollController";
 import ensureAuthenticated from "../middlewares/ensureAuthenticated";
 
@@ -16,7 +15,6 @@ const outputPayrollController = new OutputPayrollController();
 const inputPayrollController = new InputPayrollController();
 const singlePayrollController = new SinglePayrollController()
 const deletePayrollController = new DeletePayrollController()
-const exportExcelPayrollController = new ExportExcelPayrollController()
 
 payrollRouter.use(ensureAuthenticated)
 
@@ -27,7 +25,6 @@ payrollRouter.get("/input", listInputPayrollController.handle);
 payrollRouter.get("/:id", singlePayrollController.handle);
 payrollRouter.put("/:id", inputPayrollController.handle);
 payrollRouter.delete("/", deletePayrollController.handle)
-payrollRouter.get("/excel/export2", exportExcelPayrollController.handle)
 
 payrollRouter.get("/excel/export", (request, response) => {
   try {
