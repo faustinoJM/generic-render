@@ -1,4 +1,4 @@
-import { ISalario,IPayrollDemo } from "../useCases/createPayroll/CreatePayrollUseCase";
+import { IPayrollDemo, ISalario } from "../useCases/createPayroll/CreatePayrollUseCase";
 
 
 interface ICreatePayrollDTO2 {
@@ -36,14 +36,14 @@ interface ICreatePayrollDTO2 {
   total_inss?: number
   user_id?: string;
   company_id?: string;
-  // total_salary_liquid?: string;
-  // total_salary_base?: string;
-  // total_salary_liquid?: number
-  // total_salary_base?: number
-  // total_salary_gross?: number
-  // total_inss_employee?: number
-  // total_inss_company?: number
-  // total_irps?: number
+  total_salary_liquid?: string
+  total_salary_base?: string
+  total_salary_gross?: string
+  total_inss_employee?: string
+  total_inss_company?: string
+  total_irps?: string
+  total_inssBoth?: string;
+  created_at?: Date;
   tabelaSalario?: ISalario;
   payrollDemo?: IPayrollDemo;
 }

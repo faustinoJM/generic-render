@@ -10,7 +10,7 @@ import Setting from "../../../modules/settings/infra/typeorm/entities/Setting"
 
 
 const options:  any = {
-     type: "postgres",
+    type: "postgres",
     // host: "localhost",
     // port: 5432,
     // username: "postgres",

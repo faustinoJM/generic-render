@@ -7,6 +7,7 @@ import { SinglePayrollController } from "../../../../modules/payrolls/useCases/s
 import exceljs from "exceljs"
 import { ListInputPayrollController } from "../../../../modules/payrolls/useCases/ListInputPayroll/ListInputPayrollController";
 import ensureAuthenticated from "../middlewares/ensureAuthenticated";
+import { ImportExcelController } from "../../../../modules/payrolls/useCases/importExcel/ImportExcelController";
 
 const payrollRouter = Router();
 const createPayrollController = new CreatePayrollController();
@@ -15,6 +16,7 @@ const outputPayrollController = new OutputPayrollController();
 const inputPayrollController = new InputPayrollController();
 const singlePayrollController = new SinglePayrollController()
 const deletePayrollController = new DeletePayrollController()
+const importExcelController = new ImportExcelController()
 
 payrollRouter.use(ensureAuthenticated)
 
@@ -25,6 +27,38 @@ payrollRouter.get("/input", listInputPayrollController.handle);
 payrollRouter.get("/:id", singlePayrollController.handle);
 payrollRouter.put("/:id", inputPayrollController.handle);
 payrollRouter.delete("/", deletePayrollController.handle)
+payrollRouter.post("/excel/import", importExcelController.handle)
+
+// payrollRouter.post("/excel/import", (request, response) => {
+//   const data = request.body
+//   const dataDepart: oop[] = []
+//   const dataPosition: oop[] = []
+//   const employee = {} as any;
+
+//   data.map((d: any)=> {
+//         Object.entries(keyToPropMap).forEach(([key, prop]) => {
+//           if (d[key] !== undefined) {
+//             if(prop === "birth_date" || prop === "start_date")
+//                 employee[prop] = new Date(Date.UTC(0, 0, d[key] - 1))  
+//             else
+//                 employee[prop] = d[key];           
+//           }
+//         });
+//         dataPosition.push(
+//           employee["position_id"]
+//         )
+//         dataDepart.push(
+//           employee["department_id"]
+//         )
+        
+//       })
+    
+
+//   console.log(dataDepart)
+//   console.log(dataPosition)
+//   response.status(201).json(data)
+// })
+
 
 payrollRouter.get("/excel/export", (request, response) => {
   try {
@@ -192,3 +226,55 @@ const mock = [{
   "gender": "Male",
   "ip_address": "23.254.75.72"
 }]
+
+const keyToPropMap = {
+  "Nome": "name",
+  "Dependentes": "dependents",
+  "Salario Base": "salary",
+  "Cargo": "position_id",
+  "Departamento": "department_id",
+  "Data de Nascimento": "birth_date",
+  "Naturalidade": "place_birth",
+  "Nacionalidade": "nationality",
+  "Numero de BI": "bi",
+  "Estado Civil": "marital_status",
+  "Sexo": "gender",
+  "Residencia": "address",
+  "Contacto1": "contact",
+  "Contacto2": "contact2",
+  "Email": "email",
+  "NUIT": "nuit",
+  "Subsidio": "subsidy",
+  "Data de Inicio": "start_date",
+  "Estado do Funcionario": "employee_status",
+  "Nome do Banco": "bank_name",
+  "Numero da Conta": "bank_account",
+  "NIB": "nib",
+  "Numero de Seg. Social": "social_security"
+};
+
+interface oop {
+name?: string
+dependents?: string
+salary?: string
+position_id?: string
+department_id?: string
+birth_date?: string
+place_birth?: string
+nationality?: string
+bi?: string
+marital_status?: string
+gender?: string
+address?: string
+contact?: string
+contact2?: string
+email?: string
+nuit?: string
+subsidy?: string
+start_date?: string
+employee_status?: string
+bank_name?: string
+bank_account?: string
+nib?: string
+social_security?: string
+}

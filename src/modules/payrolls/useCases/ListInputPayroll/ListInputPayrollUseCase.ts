@@ -126,6 +126,7 @@ class ListInputPayrollUseCase {
             inss_employee: payroll.inss_employee,
             inss_company: payroll.inss_company,
             total_inss: +(payroll.inss_company) + (+payroll.inss_employee) as any,
+            created_at: payroll.created_at,
             tabelaSalario: payroll.tabelaSalario,
             payrollDemo: payroll.payrollDemo
           };

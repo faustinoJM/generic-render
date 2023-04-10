@@ -1,3 +1,4 @@
+import { ISalario, IPayrollDemo } from "../useCases/listPayroll/ListPayrollUseCase";
 
 interface ICreatePayrollDTO {
   id?: string;
@@ -27,7 +28,8 @@ interface ICreatePayrollDTO {
   IRPS?: string;
   INSS?: string;
   total_income?: string;
-
+  tabelaSalario?: ISalario;
+  payrollDemo?: IPayrollDemo;
 }
 
 export { ICreatePayrollDTO };

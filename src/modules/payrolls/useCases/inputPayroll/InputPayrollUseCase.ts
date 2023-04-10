@@ -88,7 +88,7 @@ class InputPayrollUseCase {
         if (!user) {
           throw new  AppError("User Auth doesn't Exists")
         }
-        
+
         const listEmployeesPayrolls: ICreatePayrollDTO2[] = [];
         // let employeePayroll: ICreatePayrollTO = {}
         const payrolls = await this.payrollRepository.list(user.company_id)
