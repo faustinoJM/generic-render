@@ -8,6 +8,7 @@ import exceljs from "exceljs"
 import { ListInputPayrollController } from "../../../../modules/payrolls/useCases/ListInputPayroll/ListInputPayrollController";
 import ensureAuthenticated from "../middlewares/ensureAuthenticated";
 import { ImportExcelController } from "../../../../modules/payrolls/useCases/importExcel/ImportExcelController";
+import { OutputAllController } from "../../../../modules/payrolls/useCases/listAllSAP/OutputAllController";
 
 const payrollRouter = Router();
 const createPayrollController = new CreatePayrollController();
@@ -17,7 +18,9 @@ const inputPayrollController = new InputPayrollController();
 const singlePayrollController = new SinglePayrollController()
 const deletePayrollController = new DeletePayrollController()
 const importExcelController = new ImportExcelController()
+const outputAllController = new OutputAllController()
 
+payrollRouter.get("/all", outputAllController.handle);
 payrollRouter.use(ensureAuthenticated)
 
 
@@ -28,6 +31,7 @@ payrollRouter.get("/:id", singlePayrollController.handle);
 payrollRouter.put("/:id", inputPayrollController.handle);
 payrollRouter.delete("/", deletePayrollController.handle)
 payrollRouter.post("/excel/import", importExcelController.handle)
+
 
 // payrollRouter.post("/excel/import", (request, response) => {
 //   const data = request.body
