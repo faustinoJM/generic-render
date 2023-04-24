@@ -77,6 +77,11 @@ export class CreateSettings1680599503894 implements MigrationInterface {
             isNullable: true,
           },
           {
+            name: "company_logo_name",
+            type: "varchar",
+            isNullable: true,
+          },
+          {
             name: "payroll_total_workdays_month",
             type: "int",
             isNullable: true,
@@ -114,6 +119,16 @@ export class CreateSettings1680599503894 implements MigrationInterface {
           {
             name: "subsidy",
             type: "varchar",
+            isNullable: true,
+          },
+          {
+            name: "syndicate_status",
+            type: "varchar",
+            isNullable: true,
+          },
+          {
+            name: "syndicate_tax",
+            type: "int",
             isNullable: true,
           },
           {

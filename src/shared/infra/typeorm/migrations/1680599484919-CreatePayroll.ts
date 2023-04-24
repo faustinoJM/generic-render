@@ -134,6 +134,11 @@ export class CreatePayroll1680599484919 implements MigrationInterface {
             type: "double precision",
           },
           {
+            name: "syndicate_employee",
+            type: "double precision",
+            isNullable: true,
+          },
+          {
             name: 'created_at',
             type: "timestamp",
             default: "now()"

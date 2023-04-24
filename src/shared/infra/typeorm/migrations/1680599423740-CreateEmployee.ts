@@ -63,6 +63,7 @@ export class CreateEmployee1680599423740 implements MigrationInterface {
           {
             name: "gender",
             type: "varchar",
+            // isNullable: true
           },
           {
             name: "address",
@@ -141,6 +142,16 @@ export class CreateEmployee1680599423740 implements MigrationInterface {
             name: "social_security",
             type: "bigint",
             isNullable: true
+          },
+          {
+            name: "syndicate_status",
+            type: "varchar",
+            isNullable: true,
+          },
+          {
+            name: "inss_status",
+            type: "varchar",
+            isNullable: true,
           },
           {
             name: 'created_at',
