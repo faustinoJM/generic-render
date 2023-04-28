@@ -58,12 +58,12 @@ export class CreateEmployee1680599423740 implements MigrationInterface {
           {
             name: "marital_status",
             type: "varchar",
-            // isNullable: true
+            isNullable: true
           },
           {
             name: "gender",
             type: "varchar",
-            // isNullable: true
+            isNullable: true
           },
           {
             name: "address",
@@ -73,6 +73,7 @@ export class CreateEmployee1680599423740 implements MigrationInterface {
           {
             name: "contact",
             type: "int",
+            isNullable: true
           },
           {
             name: "contact2",

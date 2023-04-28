@@ -23,12 +23,22 @@ export class CreateCompany1680599238468 implements MigrationInterface {
             isNullable: true
           },
           {
+            name: 'company_nuit',
+            type: 'bigint',
+            isNullable: true
+          },
+          {
             name: 'company_contact',
             type: 'int',
             isNullable: true
           },
           {
             name: 'company_address',
+            type: 'varchar',
+            isNullable: true
+          },
+          {
+            name: 'company_street',
             type: 'varchar',
             isNullable: true
           },

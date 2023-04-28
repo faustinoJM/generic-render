@@ -11,6 +11,7 @@ interface ICreatePayrollDTO2 {
   departament_name?: string;
   nib?: number;
   social_security?: number;
+  vacation?: number;
   nuit?: number;
   salary_base?: string;
   salary_liquid?: string;
@@ -18,6 +19,8 @@ interface ICreatePayrollDTO2 {
   year?: number;
   overtime50?: number;
   overtime100?: number;
+  totalOvertime50?: number;
+  totalOvertime100?: number;
   total_overtime?: string;
   month_total_workdays?: number;
   day_total_workhours?: number;

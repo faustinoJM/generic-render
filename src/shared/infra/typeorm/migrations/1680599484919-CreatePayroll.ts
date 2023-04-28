@@ -40,22 +40,28 @@ export class CreatePayroll1680599484919 implements MigrationInterface {
           {
             name: "position_name",
             type: "varchar",
+            isNullable: true,
           },
           {
             name: "departament_name",
             type: "varchar",
+            isNullable: true,
           },
           {
             name: "nib",
             type: "bigint",
+            isNullable: true,
           },
           {
             name: "social_security",
-            type: "bigint"
+            type: "bigint",
+            isNullable: true,
+
           },
           {
             name: "nuit",
-            type: "bigint"
+            type: "bigint",
+            isNullable: true,
           },
           {
             name: "salary_base",

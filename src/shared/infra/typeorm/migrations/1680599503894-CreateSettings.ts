@@ -22,6 +22,11 @@ export class CreateSettings1680599503894 implements MigrationInterface {
             isNullable: true,
           },
           {
+            name: 'company_nuit',
+            type: 'varchar',
+            isNullable: true,
+          },
+          {
             name: 'company_telephone',
             type: 'int',
             isNullable: true,
@@ -48,6 +53,11 @@ export class CreateSettings1680599503894 implements MigrationInterface {
           },
           {
             name: "company_address",
+            type: "varchar",
+            isNullable: true,
+          },
+          {
+            name: "company_street",
             type: "varchar",
             isNullable: true,
           },
