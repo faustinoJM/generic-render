@@ -58,6 +58,13 @@ interface IRequestList {
   total_income?: number | string
   tabelaSalario?: ISalario;
   payrollDemo?: IPayrollDemo;
+  syndicate_employee: string,
+  subsidy_transport?: string,
+  subsidy_food?: string,
+  subsidy_residence?: string,
+  subsidy_medical?: string,
+  subsidy_vacation?: string,
+  salary_thirteenth?: string,
 }
 
 
@@ -81,7 +88,14 @@ class InputPayrollUseCase {
         ) {}
 
     async execute({ id, user_id, overtime50, overtime100,
-                    absences, bonus, cash_advances, backpay}: IRequestList) {
+                    absences, bonus, cash_advances, backpay,
+                    subsidy_transport,
+                    subsidy_food,
+                    subsidy_residence,
+                    subsidy_medical,
+                    subsidy_vacation,
+                    salary_thirteenth,
+                    syndicate_employee}: IRequestList) {
 
         const user = await this.userRepository.findById(user_id as any)
 
@@ -187,6 +201,13 @@ class InputPayrollUseCase {
             irps: IRPS as any,
             inss_employee: retornarINSS(total_income) as any,
             inss_company: INSS_Company as any,
+            syndicate_employee: syndicate_employee,
+            subsidy_transport: subsidy_transport,
+            subsidy_food: subsidy_food,
+            subsidy_residence: subsidy_residence,
+            subsidy_medical: subsidy_medical,
+            subsidy_vacation: subsidy_vacation,
+            salary_thirteenth: salary_thirteenth,
             tabelaSalario: retornarTabela(+total_income!, employee.dependents),
             payrollDemo: retornarPayrollDemo(+employee.salary, overtime50,
               overtime100, payroll.month_total_workdays, payroll.day_total_workhours, absences,

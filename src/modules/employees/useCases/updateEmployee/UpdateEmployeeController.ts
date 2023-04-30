@@ -27,7 +27,14 @@ class UpdateEmployeeController {
       bank_account,
       nib,
       social_security,
-      syndicate_status, inss_status} = request.body;
+      syndicate_status, 
+      inss_status,
+      subsidy_transport,
+      subsidy_food,
+      subsidy_residence,
+      subsidy_medical,
+      subsidy_vacation,
+      salary_thirteenth,} = request.body;
     const id = request.params.id;
 
     const updateEmployeeUseCase = container.resolve(UpdateEmployeeUseCase)
@@ -53,7 +60,14 @@ class UpdateEmployeeController {
       bank_account,
       nib,
       social_security, 
-      syndicate_status, inss_status})
+      syndicate_status, 
+      inss_status,
+      subsidy_transport,
+      subsidy_food,
+      subsidy_residence,
+      subsidy_medical,
+      subsidy_vacation,
+      salary_thirteenth,})
       // console.log("++++++++", employee)
 
     return response.status(204).json(employee)

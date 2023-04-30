@@ -105,6 +105,24 @@ class Payroll {
     @Column()
     syndicate_employee: string;
 
+    @Column()
+    subsidy_transport: string
+
+    @Column()
+    subsidy_food: string
+
+    @Column()
+    subsidy_residence: string
+
+    @Column()
+    subsidy_medical: string
+
+    @Column()
+    subsidy_vacation: string
+
+    @Column()
+    salary_thirteenth: string
+
     tabelaSalario: ISalario;
 
     payrollDemo: IPayrollDemo;

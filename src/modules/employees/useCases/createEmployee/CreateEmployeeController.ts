@@ -28,7 +28,17 @@ class CreateEmployeeController {
           bank_account,
           nib,
           social_security,
-          syndicate_status, inss_status} = request.body;
+          syndicate_status, 
+          inss_status,
+          subsidy_transport,
+          subsidy_food,
+          subsidy_residence,
+          subsidy_medical,
+          subsidy_vacation,
+          salary_thirteenth,
+          } = request.body;
+
+
 
 
         const createEmployeeUseCase = container.resolve(CreateEmployeeUseCase);
@@ -54,7 +64,14 @@ class CreateEmployeeController {
           bank_account,
           nib,
           social_security,
-          syndicate_status, inss_status})
+          syndicate_status, 
+          inss_status,
+          subsidy_transport,
+          subsidy_food,
+          subsidy_residence,
+          subsidy_medical,
+          subsidy_vacation,
+          salary_thirteenth,})
 
         return response.status(201).send();
     }

@@ -24,6 +24,11 @@ export class CreateSubsidy1682691325852 implements MigrationInterface {
     isNullable: true,
   })) 
   await queryRunner.addColumn("payrolls", new TableColumn({
+    name: "subsidy_vacation",
+    type: "varchar",
+    isNullable: true,
+  })) 
+  await queryRunner.addColumn("payrolls", new TableColumn({
     name: "salary_thirteenth",
     type: "varchar",
     isNullable: true,
@@ -50,13 +55,16 @@ export class CreateSubsidy1682691325852 implements MigrationInterface {
     isNullable: true,
   }))
   await queryRunner.addColumn("employees", new TableColumn({
+    name: "subsidy_vacation",
+    type: "varchar",
+    isNullable: true,
+  })) 
+  await queryRunner.addColumn("employees", new TableColumn({
     name: "salary_thirteenth",
     type: "varchar",
     isNullable: true,
   }))
-
   
-
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {

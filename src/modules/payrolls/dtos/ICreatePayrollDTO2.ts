@@ -50,6 +50,12 @@ interface ICreatePayrollDTO2 {
   created_at?: Date;
   tabelaSalario?: ISalario;
   payrollDemo?: IPayrollDemo;
+  subsidy_transport?: string
+  subsidy_food?: string
+  subsidy_residence?: string
+  subsidy_medical?: string
+  subsidy_vacation?: string
+  salary_thirteenth?: string
 }
 
 export { ICreatePayrollDTO2 };

@@ -103,7 +103,25 @@ class Employee {
 
     @Column()
     inss_status: string;
+    
+    @Column()
+    subsidy_transport: string
 
+    @Column()
+    subsidy_food: string
+
+    @Column()
+    subsidy_residence: string
+
+    @Column()
+    subsidy_medical: string
+
+    @Column()
+    subsidy_vacation: string
+
+    @Column()
+    salary_thirteenth: string
+    
     @CreateDateColumn()
     created_at: Date
 

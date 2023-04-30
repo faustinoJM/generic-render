@@ -31,6 +31,12 @@ interface ICreateEmployeeDTO {
   company_id?: string;
   syndicate_status?: string;
   inss_status?: string
+  subsidy_transport?: string
+  subsidy_food?: string
+  subsidy_residence?: string
+  subsidy_medical?: string
+  subsidy_vacation?: string
+  salary_thirteenth?: string
 }
 
 export { ICreateEmployeeDTO };
