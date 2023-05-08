@@ -80,7 +80,7 @@ class CreatePayrollUseCase {
         const backpay = 0;
         const bonus = 0;
 
-        const month_total_workdays = settings?.payroll_total_workdays_month ?? 26;
+        const month_total_workdays = settings?.payroll_total_workdays_month ?? 30;
         const day_total_workhours = settings?.payroll_total_workhours_day ?? 8;
         const syndicate_tax = settings?.syndicate_tax ?? 1;
        

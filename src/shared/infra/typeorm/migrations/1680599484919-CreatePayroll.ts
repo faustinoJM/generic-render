@@ -56,7 +56,6 @@ export class CreatePayroll1680599484919 implements MigrationInterface {
             name: "social_security",
             type: "bigint",
             isNullable: true,
-
           },
           {
             name: "nuit",

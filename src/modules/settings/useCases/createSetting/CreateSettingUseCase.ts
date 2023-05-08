@@ -54,7 +54,7 @@ class CreateSettingUseCase {
         } else {
             // Case Setting doesn't Exists  create new
             data.company_id = user.company_id
-            data.payroll_total_workdays_month = data.payroll_total_workdays_month ?? 26
+            data.payroll_total_workdays_month = data.payroll_total_workdays_month ?? 30
             data.payroll_total_workhours_day = data.payroll_total_workhours_day ?? 8
             data.overtime = data.overtime ??  "true"
             data.absences = data.absences ?? "true"
