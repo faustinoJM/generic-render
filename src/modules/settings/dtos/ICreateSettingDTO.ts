@@ -26,6 +26,8 @@ export default interface ICreateSettingDTO {
   syndicate_status?: string;
   syndicate_tax?: number;
   company_logo_name?: string;
+  company_logo_multer?: string[];
+  CompanyLogoURL?: string;
 }
 
 

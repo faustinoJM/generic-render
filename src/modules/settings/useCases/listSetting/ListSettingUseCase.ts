@@ -3,6 +3,7 @@ import { hash } from "bcryptjs";
 import AppError  from "../../../../shared/errors/AppError";
 import ISettingRepository from "../../repositories/ISettingRepository";
 import { IUsersRepository } from "../../../accounts/repositories/IUsersRepository";
+import ICreateSettingDTO from "../../dtos/ICreateSettingDTO";
 
 
 @injectable()
@@ -22,7 +23,10 @@ class ListSettingUseCase {
           throw new AppError("User Auth doesn't Exists")
         }
         const settings = await this.settingsRepository.list(user.company_id);
-  
+
+        if (settings)
+          settings.companyLogoURL = settings.getCompanyLogoURL()
+
         return settings;
 
     }

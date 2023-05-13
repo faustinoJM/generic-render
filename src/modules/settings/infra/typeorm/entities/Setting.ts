@@ -87,6 +87,25 @@ class Setting {
   @UpdateDateColumn()
   updated_at: Date;
 
+  companyLogoURL: string;
+
+  getCompanyLogoURL(): string {
+    // return `http://localhost:3333/company-logo/${this.company_logo_name}`
+    return `https://elint-payroll-images.s3.us-east-1.amazonaws.com/company/${this.company_logo_name}`
+  }
+
+  // @Expose({ name: "avatar_url"})
+    // getCompanyLogoURL(): string {
+    //     switch(process.env.disk) {
+    //         case "local":
+    //             return `${process.env.APP_API_URL}/avatar/${this.avatar}`
+    //         case "s3": 
+    //             return `${process.env.AWS_BUCKET_URL}/avatar/${this.avatar}`;
+    //         default:
+    //             return null;
+
+    //     }
+    // }
   constructor() {
     this.id = uuidv4();
   }

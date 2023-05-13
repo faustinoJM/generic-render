@@ -6,8 +6,11 @@ import express, { Request, Response, NextFunction} from "express";
 import { AppDataSource } from "../typeorm";
 import AppError from "../../errors/AppError";
 import routes from "./routes";
+import upload from "../../../config/upload";
 
 const app = express();
+
+app.use("/company", express.static(`${upload.tmpFolder}/company`))
 
 app.use(cors());
 // app.use(express.json());

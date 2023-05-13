@@ -1,5 +1,7 @@
 import { inject, injectable } from "tsyringe";
+import { IStorageProvider } from "../../../../shared/container/provider/StorageProvider/IStorageProvider";
 import AppError  from "../../../../shared/errors/AppError";
+import { deleteFile } from "../../../../utils/filte";
 import { IUsersRepository } from "../../../accounts/repositories/IUsersRepository";
 import ICreateSettingDTO from "../../dtos/ICreateSettingDTO";
 import ISettingRepository from "../../repositories/ISettingRepository";
@@ -12,7 +14,10 @@ class CreateSettingUseCase {
         private settingRepository: ISettingRepository,
         
         @inject("UsersRepository")
-        private userRepository: IUsersRepository) {}
+        private userRepository: IUsersRepository,
+        
+        @inject("StorageProvider")
+        private storageProvider: IStorageProvider) {}
 
     async execute(data: ICreateSettingDTO) {
         const user  = await this.userRepository.findById(data.user_id as any)
@@ -22,7 +27,26 @@ class CreateSettingUseCase {
         }
         
         const settingAlreadyExists = await this.settingRepository.findById(user.company_id as any);
+
+        if (settingAlreadyExists) {
+          console.log("111124",settingAlreadyExists.company_logo_name)
+        }
         
+        let file_logo_name = null
+        if (data.company_logo_multer && data.company_logo_multer.length > 0) {
+          if (settingAlreadyExists?.company_logo_name) {
+            await deleteFile(`./tmp/company/${settingAlreadyExists.company_logo_name}`);
+            await this.storageProvider.delete(settingAlreadyExists.company_logo_name, "company")
+            }
+          file_logo_name = await this.storageProvider.save(data.company_logo_multer[0] as any, "company")
+        }
+
+      //   data.company_logo_name?.map( async (image) => {
+      //     await this.storageProvider.save(image, "company")
+      // })
+
+        console.log("Opa", file_logo_name)
+
         if(settingAlreadyExists) {
         // Case settingAlreadyExists update
             await this.settingRepository.create({
@@ -50,6 +74,7 @@ class CreateSettingUseCase {
               subsidy: data.subsidy,
               syndicate_status: data.syndicate_status,
               syndicate_tax: data.syndicate_tax,
+              company_logo_name: file_logo_name ?? settingAlreadyExists.company_logo_name
             });
         } else {
             // Case Setting doesn't Exists  create new
@@ -64,7 +89,8 @@ class CreateSettingUseCase {
             data.subsidy = data.subsidy ?? "true"
             data.syndicate_status = data.syndicate_status ?? "true"
             data.syndicate_tax = data.syndicate_tax ?? 1
-          await this.settingRepository.create(data);
+            data.company_logo_name = file_logo_name ?? ""
+            await this.settingRepository.create(data);
         }
 
     }
