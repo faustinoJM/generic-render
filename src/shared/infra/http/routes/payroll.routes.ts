@@ -4,7 +4,7 @@ import { DeletePayrollController } from "../../../../modules/payrolls/useCases/d
 import { InputPayrollController } from "../../../../modules/payrolls/useCases/inputPayroll/InputPayrollController";
 import { OutputPayrollController } from "../../../../modules/payrolls/useCases/ListOutputPayroll/OutputPayrollController";
 import { SinglePayrollController } from "../../../../modules/payrolls/useCases/singlePayroll/SinglePayrollController";
-import exceljs from "exceljs"
+// import exceljs from "exceljs"
 import { ListInputPayrollController } from "../../../../modules/payrolls/useCases/ListInputPayroll/ListInputPayrollController";
 import ensureAuthenticated from "../middlewares/ensureAuthenticated";
 import { ImportExcelController } from "../../../../modules/payrolls/useCases/importExcel/ImportExcelController";
@@ -64,47 +64,47 @@ payrollRouter.post("/excel/import", importExcelController.handle)
 // })
 
 
-payrollRouter.get("/excel/export", (request, response) => {
-  try {
-    let workbook = new exceljs.Workbook();
+// payrollRouter.get("/excel/export", (request, response) => {
+//   try {
+//     let workbook = new exceljs.Workbook();
 
-    const sheet = workbook.addWorksheet("books");
+//     const sheet = workbook.addWorksheet("books");
 
-    sheet.columns = [
-      {header: "ID", key: "id", width: 5,},
-      {header: "Nome", key: "name", width: 25},
-      {header: "Email", key: "email", width: 40},
-      {header: "Genero", key: "gender", width: 25},
-      {header: "Endereco Ip", key: "ip_address", width: 25}
-    ]
+//     sheet.columns = [
+//       {header: "ID", key: "id", width: 5,},
+//       {header: "Nome", key: "name", width: 25},
+//       {header: "Email", key: "email", width: 40},
+//       {header: "Genero", key: "gender", width: 25},
+//       {header: "Endereco Ip", key: "ip_address", width: 25}
+//     ]
 
-    mock.map((value, idx) => {
-      sheet.addRow({
-        id: value.id,
-        name: value.name,
-        email: value.email,
-        gender: value.gender,
-        ip_address: value.ip_address
-      });
-    });
+//     mock.map((value, idx) => {
+//       sheet.addRow({
+//         id: value.id,
+//         name: value.name,
+//         email: value.email,
+//         gender: value.gender,
+//         ip_address: value.ip_address
+//       });
+//     });
 
-    sheet.getRow(1).font = {
-      bold: true,
-    }
-    response.setHeader(
-      "content-type",
-      "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
-    )
+//     sheet.getRow(1).font = {
+//       bold: true,
+//     }
+//     response.setHeader(
+//       "content-type",
+//       "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+//     )
 
-    response.setHeader(
-      "Content-Disposition",
-      "attachment;filename=" + "exceljsExport.xlsx"
-    )
-    workbook.xlsx.write(response)
-  } catch {
+//     response.setHeader(
+//       "Content-Disposition",
+//       "attachment;filename=" + "exceljsExport.xlsx"
+//     )
+//     workbook.xlsx.write(response)
+//   } catch {
 
-  }
-})
+//   }
+// })
 
 
 export { payrollRouter };
