@@ -10,7 +10,7 @@ import upload from "../../../config/upload";
 
 const app = express();
 
-app.use("/company-logo", express.static(`${upload.tmpFolder}/company`))
+app.use("/companyy-logo", express.static(`${upload.tmpFolder}/company`))
 
 app.use(cors());
 // app.use(express.json());
