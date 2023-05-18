@@ -60,3 +60,18 @@ class S3StorageProvider implements IStorageProvider {
 }
 
 export { S3StorageProvider }
+
+//Stmt1683982178051
+// {
+// 	"Version": "2012-10-17",
+// 	"Id": "Policy1683982179485",
+// 	"Statement": [
+// 		{
+// 			"Sid": "AllowAll",
+// 			"Effect": "Allow",
+// 			"Principal": "*",
+// 			"Action": "s3:GetObject",
+// 			"Resource": "arn:aws:s3:::elint-payroll-images/* "
+// 		}
+// 	]
+// }
