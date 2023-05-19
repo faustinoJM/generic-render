@@ -1,0 +1,135 @@
+Dashboard
+FUNCIONARIOS
+
+Funcionario
+Cargo
+DEPARTAMENTOS
+
+Departamento
+FOLHA DE SALARIO
+
+Nova Folha
+Processamento
+Folha
+RECURSOS
+
+INSS
+Faltas
+USUARIO
+
+Settings
+Sair
+
+FUNCIONARIOS
+
+ver funcionarios
+CARGOS
+
+ver cargos
+DEPARTAMENTOS
+
+ver departamentos
+TOTAL PAGAMENTOS
+
+ver folha de salario
+Total
+
+Funcionarios por Departmento
+Funcionarios por Cargo
+Salarios por Departmento
+Salarios por Cargo
+Total de Pagamentos (Mes)
+
+Importar Lista
+Adicionar Novo
+
+Adicionar nova Folha
+
+Processamento Salario
+
+Lista de folhas de Salarios
+
+Tempo de trabalho
+Total dias de Trabalho por mes:
+30
+Total horas de Trabalho por dia
+
+ID, 
+Nome, 
+Departamento, 
+Cargo, 
+Salario Base
+Subsidio, 
+Subsidio Transporte
+Subsidio Alimentacao
+Subsidio Residencia
+Subsidio Medico
+Subsidio de 
+Subsidio, 
+Bonus, 
+Total Horas Extras
+Total Desconto 
+Adiantamentos, 
+Retroativos, 
+Salario Bruto
+IRPS, 
+INSS (3%
+Sindicato, 
+Salario Liquido
+INSS (4%
+Total INSS
+MES, 
+ANO, 
+
+
+
+Dados Pessoias
+Nome
+Data de Nascimento
+18/05/2023
+Naturalidade
+Nacionalidade
+Numero de BI
+Estado Civil:
+
+Selecione Estado Civil
+Sexo:
+
+Selecione Sexo
+Residencia
+Contacto
+contacto1
+contacto2
+Email
+NUIT
+Numero de Dependentes
+Total dias de ferias
+0
+Sindicato
+
+Selecione Sindicato
+
+Image:
+Dados da Empresa
+Departamento
+
+Selecione Departemento
+Cargo
+
+Selecione Cargo
+Data de inicio
+18/05/2023
+Data do fim
+Estado do funcionario
+
+Selecione Estado
+Salario Base
+0
+Subsidio
+0
+Dados Financeiro
+Nome do Banco
+Numero da Conta Bancaria
+NIB
+Numero de Seg. Social
+Estado INSS
