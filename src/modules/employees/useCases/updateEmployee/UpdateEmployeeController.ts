@@ -6,15 +6,15 @@ class UpdateEmployeeController {
   async handle(request: Request, response: Response) {
     const user_id = request.user?.id;
 
-    const {employee_id, name, dependents, salary, position_id, department_id, birth_date, 
+    const {employee_number, name, dependents, salary, position_id, department_id, birth_date, 
       place_birth,
       nationality,
       bi,
       marital_status,
       gender,
       address,
-      contact,
-      contact2,
+      contact_1,
+      contact_2,
       email,
       nuit,
       vacation,
@@ -27,27 +27,20 @@ class UpdateEmployeeController {
       bank_account,
       nib,
       social_security,
-      syndicate_status, 
-      inss_status,
-      subsidy_transport,
-      subsidy_food,
-      subsidy_residence,
-      subsidy_medical,
-      subsidy_vacation,
-      salary_thirteenth,} = request.body;
+      syndicate_status, inss_status} = request.body;
     const id = request.params.id;
 
     const updateEmployeeUseCase = container.resolve(UpdateEmployeeUseCase)
 
-    const employee = await updateEmployeeUseCase.execute({id, user_id, employee_id, name, dependents, salary, position_id, department_id, birth_date, 
+    const employee = await updateEmployeeUseCase.execute({id, user_id, employee_number, name, dependents, salary, position_id, department_id, birth_date, 
       place_birth,
       nationality,
       bi,
       marital_status,
       gender,
       address,
-      contact,
-      contact2,
+      contact_1,
+      contact_2,
       email,
       nuit,
       vacation,
@@ -60,14 +53,7 @@ class UpdateEmployeeController {
       bank_account,
       nib,
       social_security, 
-      syndicate_status, 
-      inss_status,
-      subsidy_transport,
-      subsidy_food,
-      subsidy_residence,
-      subsidy_medical,
-      subsidy_vacation,
-      salary_thirteenth,})
+      syndicate_status, inss_status})
       // console.log("++++++++", employee)
 
     return response.status(204).json(employee)

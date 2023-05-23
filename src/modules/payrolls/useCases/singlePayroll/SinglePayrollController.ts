@@ -9,7 +9,7 @@ class SinglePayrollController {
         const user_id = request.user?.id;
 
         const id = request.params.id || request.body
-        console.log(id)
+        // console.log(id)
 
         const singlePayrollUseCase = container.resolve(SinglePayrollUseCase);
 

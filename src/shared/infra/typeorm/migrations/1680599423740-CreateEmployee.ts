@@ -13,7 +13,7 @@ export class CreateEmployee1680599423740 implements MigrationInterface {
             isPrimary: true,
           },
           {
-            name: 'employee_id',
+            name: 'employee_number',
             type: 'int',
             // isGenerated: true,
             // generationStrategy: 'increment',
@@ -71,13 +71,18 @@ export class CreateEmployee1680599423740 implements MigrationInterface {
             isNullable: true
           },
           {
-            name: "contact",
-            type: "int",
+            name: "street",
+            type: "varchar",
             isNullable: true
           },
           {
-            name: "contact2",
-            type: "int",
+            name: "contact_1",
+            type: "varchar", //"bigint",
+            isNullable: true
+          },
+          {
+            name: "contact_2",
+            type: "varchar", //"bigint",
             isNullable: true
           },
           {
@@ -98,15 +103,36 @@ export class CreateEmployee1680599423740 implements MigrationInterface {
           {
             name: "subsidy",
             type: "double precision",
+            isNullable: true
           },
           {
-            name: "department",
-            type: "varchar",
+            name: "subsidy_transport",
+            type: "double precision",
             isNullable: true,
           },
           {
-            name: "position",
-            type: "varchar",
+            name: "subsidy_food",
+            type: "double precision",
+            isNullable: true,
+          },
+          {
+            name: "subsidy_residence",
+            type: "double precision",
+            isNullable: true,
+          },
+          {
+            name: "subsidy_medical",
+            type: "double precision",
+            isNullable: true,
+          },
+          {
+            name: "subsidy_vacation",
+            type: "double precision",
+            isNullable: true,
+          }, 
+          {
+            name: "salary_thirteenth",
+            type: "double precision",
             isNullable: true,
           },
           {

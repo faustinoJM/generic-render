@@ -1,35 +1,38 @@
 import { Router } from "express";
 import { CreatePayrollController } from "../../../../modules/payrolls/useCases/createPayroll/CreatePayrollController";
 import { DeletePayrollController } from "../../../../modules/payrolls/useCases/deletePayroll/DeletePayrollController";
-import { InputPayrollController } from "../../../../modules/payrolls/useCases/inputPayroll/InputPayrollController";
-import { OutputPayrollController } from "../../../../modules/payrolls/useCases/ListOutputPayroll/OutputPayrollController";
+// import { InputPayrollController } from "../../../../modules/payrolls/useCases/inputPayroll/InputPayrollController";
+// import { OutputPayrollController } from "../../../../modules/payrolls/useCases/ListOutputPayroll/OutputPayrollController";
 import { SinglePayrollController } from "../../../../modules/payrolls/useCases/singlePayroll/SinglePayrollController";
-// import exceljs from "exceljs"
-import { ListInputPayrollController } from "../../../../modules/payrolls/useCases/ListInputPayroll/ListInputPayrollController";
+import exceljs from "exceljs"
+// import { ListInputPayrollController } from "../../../../modules/payrolls/useCases/ListInputPayroll/ListInputPayrollController";
 import ensureAuthenticated from "../middlewares/ensureAuthenticated";
 import { ImportExcelController } from "../../../../modules/payrolls/useCases/importExcel/ImportExcelController";
-import { OutputAllController } from "../../../../modules/payrolls/useCases/listAllSAP/OutputAllController";
+import { ListAllPayrollController } from "../../../../modules/payrolls/useCases/listAllPayroll/ListAllPayrollController";
+// import { OutputAllController } from "../../../../modules/payrolls/useCases/listAllSAP/OutputAllController";
 
 const payrollRouter = Router();
 const createPayrollController = new CreatePayrollController();
-const listInputPayrollController = new ListInputPayrollController()
-const outputPayrollController = new OutputPayrollController();
-const inputPayrollController = new InputPayrollController();
+// const listInputPayrollController = new ListInputPayrollController()
+// const outputPayrollController = new OutputPayrollController();
+// const inputPayrollController = new InputPayrollController();
 const singlePayrollController = new SinglePayrollController()
 const deletePayrollController = new DeletePayrollController()
 const importExcelController = new ImportExcelController()
-const outputAllController = new OutputAllController()
+// const outputAllController = new OutputAllController()
+const listAllPayrollController = new ListAllPayrollController()
 
-payrollRouter.get("/all", outputAllController.handle);
+// payrollRouter.get("/all", outputAllController.handle);
 payrollRouter.use(ensureAuthenticated)
 
+payrollRouter.get("/", listAllPayrollController.handle);
 
 payrollRouter.post("/", createPayrollController.handle);
-payrollRouter.get("/", outputPayrollController.handle);
-payrollRouter.get("/input", listInputPayrollController.handle);
+// payrollRouter.get("/", outputPayrollController.handle);
+// payrollRouter.get("/input", listInputPayrollController.handle);
 payrollRouter.get("/:id", singlePayrollController.handle);
-payrollRouter.put("/:id", inputPayrollController.handle);
-payrollRouter.delete("/", deletePayrollController.handle)
+// payrollRouter.put("/:id", inputPayrollController.handle);
+payrollRouter.delete("/:id", deletePayrollController.handle)
 payrollRouter.post("/excel/import", importExcelController.handle)
 
 
@@ -64,47 +67,47 @@ payrollRouter.post("/excel/import", importExcelController.handle)
 // })
 
 
-// payrollRouter.get("/excel/export", (request, response) => {
-//   try {
-//     let workbook = new exceljs.Workbook();
+payrollRouter.get("/excel/export", (request, response) => {
+  try {
+    let workbook = new exceljs.Workbook();
 
-//     const sheet = workbook.addWorksheet("books");
+    const sheet = workbook.addWorksheet("books");
 
-//     sheet.columns = [
-//       {header: "ID", key: "id", width: 5,},
-//       {header: "Nome", key: "name", width: 25},
-//       {header: "Email", key: "email", width: 40},
-//       {header: "Genero", key: "gender", width: 25},
-//       {header: "Endereco Ip", key: "ip_address", width: 25}
-//     ]
+    sheet.columns = [
+      {header: "ID", key: "id", width: 5,},
+      {header: "Nome", key: "name", width: 25},
+      {header: "Email", key: "email", width: 40},
+      {header: "Genero", key: "gender", width: 25},
+      {header: "Endereco Ip", key: "ip_address", width: 25}
+    ]
 
-//     mock.map((value, idx) => {
-//       sheet.addRow({
-//         id: value.id,
-//         name: value.name,
-//         email: value.email,
-//         gender: value.gender,
-//         ip_address: value.ip_address
-//       });
-//     });
+    mock.map((value, idx) => {
+      sheet.addRow({
+        id: value.id,
+        name: value.name,
+        email: value.email,
+        gender: value.gender,
+        ip_address: value.ip_address
+      });
+    });
 
-//     sheet.getRow(1).font = {
-//       bold: true,
-//     }
-//     response.setHeader(
-//       "content-type",
-//       "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
-//     )
+    sheet.getRow(1).font = {
+      bold: true,
+    }
+    response.setHeader(
+      "content-type",
+      "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+    )
 
-//     response.setHeader(
-//       "Content-Disposition",
-//       "attachment;filename=" + "exceljsExport.xlsx"
-//     )
-//     workbook.xlsx.write(response)
-//   } catch {
+    response.setHeader(
+      "Content-Disposition",
+      "attachment;filename=" + "exceljsExport.xlsx"
+    )
+    workbook.xlsx.write(response)
+  } catch {
 
-//   }
-// })
+  }
+})
 
 
 export { payrollRouter };

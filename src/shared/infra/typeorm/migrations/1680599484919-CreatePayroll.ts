@@ -13,21 +13,8 @@ export class CreatePayroll1680599484919 implements MigrationInterface {
             isPrimary: true,
           },
           {
-            name: 'employee_uid',
-            type: 'uuid', 
-            isNullable: true
-          },
-          {
             name: 'company_id',
             type: 'uuid',
-          },
-          {
-            name: 'employee_name',
-            type: 'varchar', 
-          },
-          {
-            name: "dependents",
-            type: "int",
           },
           {
             name: "year",
@@ -38,109 +25,18 @@ export class CreatePayroll1680599484919 implements MigrationInterface {
             type: "varchar",
           },
           {
-            name: "position_name",
+            name: "payroll_status",
             type: "varchar",
             isNullable: true,
           },
           {
-            name: "departament_name",
+            name: 'total_employee',
+            type: 'int',
+            isNullable: true
+          },
+          {
+            name: "flag",
             type: "varchar",
-            isNullable: true,
-          },
-          {
-            name: "nib",
-            type: "bigint",
-            isNullable: true,
-          },
-          {
-            name: "social_security",
-            type: "bigint",
-            isNullable: true,
-          },
-          {
-            name: "nuit",
-            type: "bigint",
-            isNullable: true,
-          },
-          {
-            name: "salary_base",
-            type: "double precision",
-          },
-          {
-            name: "total_income",
-            type: "double precision",
-          },
-          {
-            name: "salary_liquid",
-            type: "double precision",
-          },
-          {
-            name: "overtime50",
-            type: "int",
-          },
-          {
-            name: "overtime100",
-            type: "int",
-          },
-          {
-            name: "total_overtime",
-            type: "double precision",
-          },
-          {
-            name: "month_total_workdays",
-            type: "int",
-          },
-          {
-            name: "day_total_workhours",
-            type: "int",
-          },
-          {
-            name: "base_day",
-            type: "double precision",
-          },
-          {
-            name: "base_hour",
-            type: "double precision",
-          },
-          {
-            name: "absences",
-            type: "int",
-          },
-          {
-            name: "total_absences",
-            type: "double precision",
-          },
-          {
-            name: "cash_advances",
-            type: "double precision",
-          },
-          {
-            name: "backpay",
-            type: "double precision",
-          },
-          {
-            name: "subsidy",
-            type: "double precision",
-          },
-          {
-            name: "bonus",
-            type: "double precision",
-          },
-          {
-            name: "irps",
-            type: "double precision",
-          },          
-          {
-            name: "inss_employee",
-            type: "double precision",
-          },
-          {
-            name: "inss_company",
-            type: "double precision",
-          },
-          {
-            name: "syndicate_employee",
-            type: "double precision",
             isNullable: true,
           },
           {
@@ -156,15 +52,7 @@ export class CreatePayroll1680599484919 implements MigrationInterface {
         ],
         foreignKeys: [
           {
-            name: 'FKPayrollEmployee',
-            referencedTableName: 'employees',
-            referencedColumnNames: ['id'],
-            columnNames: ['employee_uid'],
-            onDelete: 'SET NULL',
-            onUpdate: 'CASCADE'
-          },
-          {
-            name: "FKPayrollCompany",
+            name: "FKPayrollsCompany",
             referencedTableName: "company",
             referencedColumnNames: ["id"],
             columnNames: ["company_id"],

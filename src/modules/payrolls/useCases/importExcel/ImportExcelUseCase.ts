@@ -4,7 +4,6 @@ import IPositionsRepository from "../../../positions/repositories/IPositionsRepo
 import IDepartmentsRepository from "../../../departments/repositories/IDepartmentsRepository";
 import { IPayrollRepository } from "../../repositories/IPayrollRepository";
 import { IEmployeesRepository } from "../../../employees/repositories/IEmployeesRepository";
-import { IPayrollDemo, ISalario } from "../ListOutputPayroll/OutputPayrollUseCase";
 import { IUsersRepository } from "../../../accounts/repositories/IUsersRepository";
 import { response } from "express";
 import { CreatePositionUseCase } from "../../../positions/useCases/createPosition/CreatePositionUseCase";
@@ -12,12 +11,12 @@ import { CreateEmployeeUseCase } from "../../../employees/useCases/createEmploye
 
 interface ICreatePayrollDTO2 {
   id?: string;
-  employee_uid?: string;
-  employee_id?: number;
+  employee_id?: string;
+  employee_number?: number;
   employee_name?: string;
   dependents?: number;
   position_name?: string;
-  departament_name?: string;
+  department_name?: string;
   nib?: number,
   nuit?: number,
   social_security?: number,
@@ -46,8 +45,7 @@ interface ICreatePayrollDTO2 {
   inss_employee?: string;
   inss_company?: string;
   total_income?: string;
-  tabelaSalario?: ISalario;
-  payrollDemo?: IPayrollDemo;
+
 }
 interface ICreateEmployeeDTO {
   id?: string;

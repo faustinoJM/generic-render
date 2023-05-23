@@ -1,6 +1,6 @@
 interface ICreateEmployeeDTO {
   id?: string;
-  employee_id?: number;
+  employee_number?: number;
   name: string;
   salary: string;
   dependents: number;
@@ -13,12 +13,18 @@ interface ICreateEmployeeDTO {
   marital_status?: string;
   gender?: string;
   address?: string;
-  contact?:  number;
-  contact2?: number;
+  contact_1?:  string;
+  contact_2?: string;
   email?: string;
   nuit?: number;
   vacation?: number;
   subsidy?:  string;
+  subsidy_transport?: string;
+  subsidy_food?: string;
+  subsidy_residence?: string;
+  subsidy_medical?: string;
+  subsidy_vacation?: string;
+  salary_thirteenth?: string;
   department?: string;
   position?: string;
   start_date?: Date;
@@ -31,12 +37,6 @@ interface ICreateEmployeeDTO {
   company_id?: string;
   syndicate_status?: string;
   inss_status?: string
-  subsidy_transport?: string
-  subsidy_food?: string
-  subsidy_residence?: string
-  subsidy_medical?: string
-  subsidy_vacation?: string
-  salary_thirteenth?: string
 }
 
 export { ICreateEmployeeDTO };

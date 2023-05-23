@@ -1,5 +1,7 @@
 export default interface ICreateSettingDTO {
   id?: string;
+  user_id?: string;
+  company_id?: string;
   company_name?: string;
   company_telephone?: number;
   company_contact?: number;
@@ -7,32 +9,41 @@ export default interface ICreateSettingDTO {
   company_website?: string;
   company_fax?: string;
   company_address?: string;
+  company_address_2?: string;
+  company_street?: string;
   company_province?: string;
   company_city?: string;
   postal_code?: number
   company_country?: string;
-  company_avatar?: string
-  payroll_total_workdays_month?: number;
-  payroll_total_workhours_day?: number;
-  overtime?: string
-  absences?: string
-  cash_advances?: string
-  bonus?: string
-  backpay?: string
-  subsidy?: string
-  flag?: number;
-  user_id?: string;
-  company_id?: string;
-  syndicate_status?: string;
-  syndicate_tax?: number;
+  company_avatar?: string;
+  company_nuit?: string;
+  company_bank_name?: string;
+  company_bank_account?: string;
   company_logo_name?: string;
+  company_logo_title?: string;
+  payroll_month_total_workdays?: number;
+  payroll_day_total_workhours?: string;
+  payroll_syndicate_tax?: number;
+  payroll_inss_employee_tax?: number,
+  payroll_inss_company_tax?: number,
+  column_position_name?: string
+  column_department_name?: string
+  column_overtime?: string
+  column_absences?: string
+  column_cash_advances?: string
+  column_backpay?: string
+  column_bonus?: string
+  column_subsidy?: string
+  column_syndicate?: string
+  column_subsidy_transport?: string
+  column_subsidy_food?: string
+  column_subsidy_residence?: string
+  column_subsidy_medical?: string
+  column_subsidy_vacation?: string
+  column_salary_thirteenth?: string
+  language_options?: string;
+  flag?: number;
   company_logo_multer?: string[];
   CompanyLogoURL?: string;
+
 }
-
-
-
-// "company_name"
-// "telephone""contact""email""website""fax""company_address""company_province"
-// "company_city""postal_code""company_country"
-// "avatar""total_month_workdays""total_day_workhours"

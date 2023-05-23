@@ -1,8 +1,8 @@
 import { Request, Response } from "express";
 import { container } from "tsyringe";
-import { InputPayrollUseCase } from "./InputPayrollUseCase";
+import { InputPayrollEmployeeUseCase } from "./InputPayrollEmployeeUseCase";
 
-class InputPayrollController {
+class InputPayrollEmployeeController {
 
     async handle(request: Request, response: Response) {
         const user_id = request.user?.id;
@@ -16,6 +16,7 @@ class InputPayrollController {
           cash_advances,
           backpay,
           bonus,
+          subsidy,
           subsidy_transport,
           subsidy_food,
           subsidy_residence,
@@ -26,7 +27,7 @@ class InputPayrollController {
           const id = request.params.id;
 
 
-        const inputPayrollUseCase = container.resolve(InputPayrollUseCase);
+        const inputPayrollUseCase = container.resolve(InputPayrollEmployeeUseCase);
 
         const payrolls = await inputPayrollUseCase.execute({ 
           id,
@@ -39,6 +40,7 @@ class InputPayrollController {
           cash_advances,
           backpay,
           bonus,
+          subsidy,
           subsidy_transport,
           subsidy_food,
           subsidy_residence,
@@ -51,4 +53,4 @@ class InputPayrollController {
     }
 }
 
-export { InputPayrollController }
+export { InputPayrollEmployeeController }

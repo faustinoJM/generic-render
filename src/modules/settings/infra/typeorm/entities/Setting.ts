@@ -31,6 +31,12 @@ class Setting {
   company_address: string;
 
   @Column()
+  company_address_2: string;
+
+  @Column()
+  company_street: string;
+
+  @Column()
   company_province: string;
   
   @Column()
@@ -46,40 +52,85 @@ class Setting {
   company_avatar: string
 
   @Column()
-  payroll_total_workdays_month: number;
-  
-  @Column()
-  payroll_total_workhours_day: number;
+  company_nuit: string;
 
   @Column()
-  overtime: string
+  company_bank_name: string;
 
   @Column()
-  absences: string
-
-  @Column()
-  cash_advances: string
-
-  @Column()
-  bonus: string
-
-  @Column()
-  backpay: string
-
-  @Column()
-  subsidy: string
-
-  @Column()
-  flag: number;
-  
-  @Column()
-  syndicate_status: string;
-
-  @Column()
-  syndicate_tax: number;
+  company_bank_account: string;
 
   @Column()
   company_logo_name: string;
+
+  @Column()
+  company_logo_title?: string;
+
+  @Column()
+  payroll_month_total_workdays: number;
+  
+  @Column()
+  payroll_day_total_workhours: string;
+
+  @Column()
+  payroll_syndicate_tax: number;
+
+  @Column()
+  payroll_inss_employee_tax: number;
+
+  @Column()
+  payroll_inss_company_tax: number;
+
+  @Column()
+  column_position_name: string
+
+  @Column()
+  column_department_name: string
+
+  @Column()
+  column_overtime: string
+
+  @Column()
+  column_absences: string
+
+  @Column()
+  column_cash_advances: string
+
+  @Column()
+  column_backpay: string
+
+  @Column()
+  column_bonus: string
+
+  @Column()
+  column_subsidy: string
+
+  @Column()
+  column_syndicate: string
+
+  @Column()
+  column_subsidy_transport: string
+
+  @Column()
+  column_subsidy_food: string
+
+  @Column()
+  column_subsidy_residence: string
+
+  @Column()
+  column_subsidy_medical: string
+
+  @Column()
+  column_subsidy_vacation: string
+
+  @Column()
+  column_salary_thirteenth: string
+
+  @Column()
+  language_options: string
+
+  @Column()
+  flag: number;
 
   @CreateDateColumn()
   created_at: Date;
@@ -95,18 +146,6 @@ class Setting {
     // return `https://elint-payroll-images.s3.us-east-1.amazonaws.com/company/${this.company_logo_name}`
   }
 
-  // @Expose({ name: "avatar_url"})
-    // getCompanyLogoURL(): string {
-    //     switch(process.env.disk) {
-    //         case "local":
-    //             return `${process.env.APP_API_URL}/avatar/${this.avatar}`
-    //         case "s3": 
-    //             return `${process.env.AWS_BUCKET_URL}/avatar/${this.avatar}`;
-    //         default:
-    //             return null;
-
-    //     }
-    // }
   constructor() {
     this.id = uuidv4();
   }

@@ -3,15 +3,14 @@ import { IPayrollDemo, ISalario } from "../useCases/createPayroll/CreatePayrollU
 
 interface ICreatePayrollDTO2 {
   id?: string;
-  employee_uid?: string;
-  employee_id?: number;
+  employee_id?: string;
+  employee_number?: number;
   employee_name?: string;
   dependents?: number;
   position_name?: string;
-  departament_name?: string;
+  department_name?: string;
   nib?: number;
   social_security?: number;
-  vacation?: number;
   nuit?: number;
   salary_base?: string;
   salary_liquid?: string;
@@ -19,8 +18,6 @@ interface ICreatePayrollDTO2 {
   year?: number;
   overtime50?: number;
   overtime100?: number;
-  totalOvertime50?: number;
-  totalOvertime100?: number;
   total_overtime?: string;
   month_total_workdays?: number;
   day_total_workhours?: number;
@@ -45,17 +42,10 @@ interface ICreatePayrollDTO2 {
   total_inss_employee?: string
   total_inss_company?: string
   total_irps?: string
-  total_inssBoth?: string;
   syndicate_employee?: string;
   created_at?: Date;
   tabelaSalario?: ISalario;
   payrollDemo?: IPayrollDemo;
-  subsidy_transport?: string
-  subsidy_food?: string
-  subsidy_residence?: string
-  subsidy_medical?: string
-  subsidy_vacation?: string
-  salary_thirteenth?: string
 }
 
 export { ICreatePayrollDTO2 };

@@ -14,13 +14,18 @@ class CompanyRepository implements ICompanyRepository {
   }
   
   public async create({ 
-    id,
-    company_name, 
-    company_contact,
-    company_email,
-    company_address,
-    company_province,
-    company_city,
+      id,
+      company_name, 
+      company_contact,
+      company_email,
+      company_address,
+      company_address_2,
+      company_street,
+      company_province,
+      company_city,
+      company_nuit,
+      company_bank_name,
+      company_bank_account,
     }: ICreateCompanyDTO): Promise<Company> {
 
       const company = this.ormRepository.create({
@@ -29,8 +34,13 @@ class CompanyRepository implements ICompanyRepository {
         company_contact,
         company_email,
         company_address,
+        company_address_2,
+        company_street,
         company_province,
         company_city,
+        company_nuit,
+        company_bank_name,
+        company_bank_account,
       })
 
       await this.ormRepository.save(company);
@@ -58,6 +68,10 @@ class CompanyRepository implements ICompanyRepository {
     const company = await this.ormRepository.find()
 
     return company;
+  }
+
+  async delete(id: string): Promise<void> {
+    await this.ormRepository.delete(id)
   }
 }
 

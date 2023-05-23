@@ -18,13 +18,24 @@ export class CreateCompany1680599238468 implements MigrationInterface {
             isUnique: true
           },
           {
-            name: 'company_email',
-            type: 'varchar',
+            name: 'company_nuit',
+            type: 'bigint',
+            // isUnique: true,
             isNullable: true
           },
           {
-            name: 'company_nuit',
-            type: 'bigint',
+            name: "company_bank_name",
+            type: "varchar",
+            isNullable: true
+          },
+          {
+            name: "company_bank_account",
+            type: "bigint",
+            isNullable: true
+          },
+          {
+            name: 'company_email',
+            type: 'varchar',
             isNullable: true
           },
           {
@@ -38,9 +49,13 @@ export class CreateCompany1680599238468 implements MigrationInterface {
             isNullable: true
           },
           {
-            name: 'company_street',
-            type: 'varchar',
-            isNullable: true
+            name: "company_address_2",
+            type: "varchar",
+            isNullable: true,
+          },{
+            name: "company_street",
+            type: "varchar",
+            isNullable: true,
           },
           {
             name: 'company_city',
@@ -50,6 +65,11 @@ export class CreateCompany1680599238468 implements MigrationInterface {
           {
             name: 'company_province',
             type: 'varchar',
+            isNullable: true
+          },
+          {
+            name: "expires_date",
+            type: "timestamp",
             isNullable: true
           },
           {
