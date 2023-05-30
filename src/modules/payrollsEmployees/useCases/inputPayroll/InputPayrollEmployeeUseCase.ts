@@ -184,7 +184,7 @@ class InputPayrollEmployeeUseCase {
           let total_income = +calcularSalarioBruto(+employee.salary, total_overtime!, total_absences, +backpay!, +bonus!, total_subsidy, salary_thirteenth!).toFixed(2)
           let IRPS = retornarIRPS(+total_income!, employee.dependents) 
           let INSS_Employee = retornarINSS_Employee(+total_income!, employee.inss_status)
-          let INSS_Company = retornarINSS_Company(+total_income)
+          let INSS_Company = retornarINSS_Company(+total_income, employee.inss_status)
           let syndicate_employee = retornarSyndicate_Tax(total_income, syndicate_tax, employee.syndicate_status)
           let salary_liquid = calcularSalarioLiquido(+total_income!, IRPS, INSS_Employee, +cash_advances!, syndicate_employee)
           
@@ -295,8 +295,8 @@ function retornarINSS_Employee(salary: number, inss_status: string) {
   return inss_status ==="true" ? salary * 0.03 : 0;
 }
 
-function retornarINSS_Company(salary: number) {
-  return salary * 0.04;
+function retornarINSS_Company(salary: number, inss_status: string) {
+  return inss_status ==="true" ? salary * 0.04 : 0;
 }
 
 function retornarSyndicate_Tax(salary: number, syndicate_tax: number, syndicate_status: string) {
