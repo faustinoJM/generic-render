@@ -220,6 +220,7 @@ class InputPayrollEmployeeUseCase {
             irps: IRPS as any,
             inss_employee: INSS_Employee as any,
             inss_company: INSS_Company as any,
+            total_inss: (INSS_Employee + INSS_Company) as any,
             syndicate_employee: syndicate_employee as any,
             subsidy_transport: subsidy_transport as any,
             subsidy_food: subsidy_food as any,
@@ -231,7 +232,6 @@ class InputPayrollEmployeeUseCase {
             payrollDemo: retornarPayrollDemo(+employee.salary, overtime50,
               overtime100, +payrollEmployee.month_total_workdays, +payrollEmployee.day_total_workhours, absences,
               +cash_advances!, +backpay!, +employee.subsidy, +bonus!, +total_income!, +IRPS!, +INSS_Employee!)
-
           };
 
           //salvar no banco de dados

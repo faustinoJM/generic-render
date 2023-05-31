@@ -174,7 +174,7 @@ class SinglePayrollEmployeeUseCase {
           irps: payroll.irps,
           inss_employee: payroll.inss_employee,
           inss_company: payroll.inss_company,
-          total_inss: payroll.total_inss,
+          total_inss: ((+payroll.inss_employee) + (+payroll.inss_company)) as any,
           syndicate_employee: payroll.syndicate_employee,
           
         };
