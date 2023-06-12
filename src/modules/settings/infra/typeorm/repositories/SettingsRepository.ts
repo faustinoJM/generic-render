@@ -53,6 +53,7 @@ class SettingsRepository implements ISettingRepository {
           column_subsidy_medical,
           column_subsidy_vacation,
           column_salary_thirteenth,
+          column_salary_fourteenth,
           language_options,
           flag,
 
@@ -100,6 +101,7 @@ class SettingsRepository implements ISettingRepository {
           column_subsidy_medical,
           column_subsidy_vacation,
           column_salary_thirteenth,
+          column_salary_fourteenth,
           language_options,
           flag,
       })

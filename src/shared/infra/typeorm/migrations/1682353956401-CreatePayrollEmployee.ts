@@ -152,7 +152,12 @@ export class CreatePayrollEmployee1682353956401 implements MigrationInterface {
           {
             name: "salary_thirteenth",
             type: "double precision",
-            // isNullable: true,
+            isNullable: true,
+          },
+          {
+            name: "salary_fourteenth",
+            type: "double precision",
+            isNullable: true,
           },
           {
             name: "irps",

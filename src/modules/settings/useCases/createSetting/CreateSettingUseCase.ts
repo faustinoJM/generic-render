@@ -86,6 +86,7 @@ class CreateSettingUseCase {
               column_subsidy_medical: data.column_subsidy_medical,
               column_subsidy_vacation: data.column_subsidy_vacation,
               column_salary_thirteenth: data.column_salary_thirteenth,
+              column_salary_fourteenth: data.column_salary_fourteenth,
               language_options: data.language_options,              
               flag: data.flag,
               company_logo_name: file_logo_name ?? settingAlreadyExists.company_logo_name,
@@ -115,6 +116,7 @@ class CreateSettingUseCase {
             data.column_subsidy_medical = data.column_subsidy_medical ?? "false"
             data.column_subsidy_vacation = data.column_subsidy_vacation ?? "false"
             data.column_salary_thirteenth = data.column_salary_thirteenth ?? "false"
+            data.column_salary_fourteenth = data.column_salary_fourteenth ?? "false"
           await this.settingRepository.create(data);
         }
 

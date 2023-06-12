@@ -210,6 +210,11 @@ export class CreateSettings1680599503894 implements MigrationInterface {
             name: "column_salary_thirteenth",
             type: "varchar",
             isNullable: true,
+          }, 
+          {
+            name: "column_salary_fourteenth",
+            type: "varchar",
+            isNullable: true,
           },
           {
             name: "language_options",

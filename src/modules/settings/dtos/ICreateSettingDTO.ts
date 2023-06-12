@@ -41,6 +41,7 @@ export default interface ICreateSettingDTO {
   column_subsidy_medical?: string
   column_subsidy_vacation?: string
   column_salary_thirteenth?: string
+  column_salary_fourteenth?: string
   language_options?: string;
   flag?: number;
   company_logo_multer?: string[];
