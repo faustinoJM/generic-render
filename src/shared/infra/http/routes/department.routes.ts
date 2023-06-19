@@ -7,6 +7,7 @@ import { UpdateDepartmentController } from "../../../../modules/departments/useC
 import { CreateEmployeeController } from "../../../../modules/employees/useCases/createEmployee/CreateEmployeeController";
 import { ListEmployeeController } from "../../../../modules/employees/useCases/listEmployee/ListEmployeeController";
 import { SingleEmployeeController } from "../../../../modules/employees/useCases/singleEmployee/SingleEmployeeController";
+import { ensureAdmin } from "../middlewares/ensureAdmin";
 import ensureAuthenticated from "../middlewares/ensureAuthenticated";
 
 const departmentRouter = Router();
@@ -17,16 +18,17 @@ const deleteDepartmentController = new DeleteDepartmentController()
 const updateDepartmentController= new UpdateDepartmentController()
 
 departmentRouter.use(ensureAuthenticated)
+// departmentRouter.use(ensureAdmin)
 
-departmentRouter.post("/", createDepartmentController.handle);
+departmentRouter.post("/", ensureAdmin, createDepartmentController.handle);
 
 departmentRouter.get("/", listDepartmentController.handle);
 
 departmentRouter.get("/:id", singleDepartmentController.handle);
 
-departmentRouter.delete("/:id", deleteDepartmentController.handle);
+departmentRouter.delete("/:id", ensureAdmin, deleteDepartmentController.handle);
 
-departmentRouter.put("/:id", updateDepartmentController.handle)
+departmentRouter.put("/:id", ensureAdmin, updateDepartmentController.handle)
 
 
 export { departmentRouter };

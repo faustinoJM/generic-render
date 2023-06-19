@@ -8,6 +8,7 @@ import { ListInputPayrollEmployeeController } from "../../../../modules/payrolls
 import { OutputPayrollEmployeeController } from "../../../../modules/payrollsEmployees/useCases/ListOutputPayroll/OutputPayrollEmployeeController";
 import { ListPayrollEmployeeController } from "../../../../modules/payrollsEmployees/useCases/listPayrollEmployee/ListPayrollEmployeeController";
 import { SinglePayrollEmployeeController } from "../../../../modules/payrollsEmployees/useCases/SinglePayrollEmployee/SinglePayrollEmployeeController";
+import { ensureAdmin } from "../middlewares/ensureAdmin";
 import ensureAuthenticated from "../middlewares/ensureAuthenticated";
 
 const payrollEmployeeRouter = Router();
@@ -25,15 +26,15 @@ payrollEmployeeRouter.get("/all", outputAllController.handle);
 payrollEmployeeRouter.use(ensureAuthenticated)
 
 
-payrollEmployeeRouter.post("/", createPayrollController.handle);
+payrollEmployeeRouter.post("/", ensureAdmin, createPayrollController.handle);
 payrollEmployeeRouter.get("/", listPayrollEmployeeController.handle);
 payrollEmployeeRouter.get("/output/:id", outputPayrollController.handle);
-payrollEmployeeRouter.get("/input", listPayrollEmployeeController.handle);
+payrollEmployeeRouter.get("/input", ensureAdmin, listPayrollEmployeeController.handle);
 // payrollEmployeeRouter.get("/input/:id", listInputPayrollController.handle);
 payrollEmployeeRouter.get("/:id", singlePayrollController.handle);
-payrollEmployeeRouter.put("/:id", inputPayrollController.handle);
-payrollEmployeeRouter.delete("/", deletePayrollController.handle)
-payrollEmployeeRouter.post("/excel/import", importExcelController.handle)
+payrollEmployeeRouter.put("/:id", ensureAdmin, inputPayrollController.handle);
+payrollEmployeeRouter.delete("/", ensureAdmin, deletePayrollController.handle)
+payrollEmployeeRouter.post("/excel/import", ensureAdmin, importExcelController.handle)
 
 
 

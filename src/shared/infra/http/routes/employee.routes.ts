@@ -4,6 +4,7 @@ import { DeleteEmployeeController } from "../../../../modules/employees/useCases
 import { ListEmployeeController } from "../../../../modules/employees/useCases/listEmployee/ListEmployeeController";
 import { SingleEmployeeController } from "../../../../modules/employees/useCases/singleEmployee/SingleEmployeeController";
 import { UpdateEmployeeController } from "../../../../modules/employees/useCases/updateEmployee/UpdateEmployeeController";
+import { ensureAdmin } from "../middlewares/ensureAdmin";
 import ensureAuthenticated from "../middlewares/ensureAuthenticated";
 
 const employeeRouter = Router();
@@ -14,15 +15,16 @@ const deleteEmployeeController = new DeleteEmployeeController()
 const updateEmployeeController = new UpdateEmployeeController()
 
 employeeRouter.use(ensureAuthenticated)
+// employeeRouter.use(ensureAdmin)
 
-employeeRouter.post("/", createEmployeeController.handle);
+employeeRouter.post("/", ensureAdmin, createEmployeeController.handle);
 
 employeeRouter.get("/", listEmployeeController.handle);
 
 employeeRouter.get("/:id", singleEmployeeController.handle);
 
-employeeRouter.delete("/:id", deleteEmployeeController.handle)
+employeeRouter.delete("/:id", ensureAdmin, deleteEmployeeController.handle)
 
-employeeRouter.put("/:id", updateEmployeeController.handle)
+employeeRouter.put("/:id", ensureAdmin, updateEmployeeController.handle)
 
 export { employeeRouter };

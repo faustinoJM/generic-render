@@ -1,19 +1,21 @@
 import { Request, Response } from "express";
 import { container } from "tsyringe";
 import { User } from "../../infra/typeorm/entities/User";
-import { ListUserUseCase } from "./ListUserUseCase";
+import { ListUserCompanyUseCase } from "./ListUserCompanyUseCase";
 
 interface IList {
   password?: string;
   is_admin?: boolean
 }
-class ListUserController {
+class ListUserCompanyController {
 
     async handle(request: Request, response: Response) {
+        const user_id = request.user?.id;
 
-        const listUserUseCase = container.resolve(ListUserUseCase);
+        const listUserCompanyUseCase = container.resolve(ListUserCompanyUseCase);
+        console.log("441",user_id)
 
-        const users = await listUserUseCase.execute()
+        const users = await listUserCompanyUseCase.execute(user_id)
         let users2: IList[] = users;
         
         users2.map(user => {
@@ -25,4 +27,4 @@ class ListUserController {
     }
 }
 
-export { ListUserController }
+export { ListUserCompanyController }

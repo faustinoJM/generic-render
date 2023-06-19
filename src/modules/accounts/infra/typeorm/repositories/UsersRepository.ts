@@ -48,6 +48,14 @@ class UsersRepository implements IUsersRepository {
         return list;
     }
 
+    async listByCompany(company_id: string): Promise<User[]> {
+        const list = await this.repository.find({
+          where: { company_id }
+        });
+
+        return list;
+    }
+
     async delete(id: string): Promise<void> {
       await this.repository.delete(id)
     }

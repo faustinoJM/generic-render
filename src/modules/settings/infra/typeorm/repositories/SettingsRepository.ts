@@ -54,6 +54,7 @@ class SettingsRepository implements ISettingRepository {
           column_subsidy_vacation,
           column_salary_thirteenth,
           column_salary_fourteenth,
+          payslip_comment,
           language_options,
           flag,
 
@@ -102,6 +103,7 @@ class SettingsRepository implements ISettingRepository {
           column_subsidy_vacation,
           column_salary_thirteenth,
           column_salary_fourteenth,
+          payslip_comment,
           language_options,
           flag,
       })

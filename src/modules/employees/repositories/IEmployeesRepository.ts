@@ -15,6 +15,7 @@ interface IEmployeesRepository {
     create(data: ICreateEmployeeDTO): Promise<void>;
     
     findByName(name: string, bi: string, company_id: string): Promise<Employee| null>;
+    findByName2(name: string, company_id: string): Promise<Employee| null>;
     findById(id: string, company_id: string): Promise<Employee | null>;
     delete(id: string): Promise<void>
 

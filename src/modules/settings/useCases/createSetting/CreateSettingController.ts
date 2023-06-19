@@ -54,6 +54,7 @@ class CreateSettingController {
           column_subsidy_vacation,
           column_salary_thirteenth,
           column_salary_fourteenth,
+          payslip_comment,
           language_options,
           flag,
         } = request.body;
@@ -107,6 +108,7 @@ class CreateSettingController {
           column_subsidy_vacation,
           column_salary_thirteenth,
           column_salary_fourteenth,
+          payslip_comment,
           language_options,
           flag,
           company_logo_multer: filename

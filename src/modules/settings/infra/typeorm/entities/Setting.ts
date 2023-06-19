@@ -112,6 +112,9 @@ class Setting {
   column_subsidy_transport: string
 
   @Column()
+  payslip_comment: string
+
+  @Column()
   column_subsidy_food: string
 
   @Column()

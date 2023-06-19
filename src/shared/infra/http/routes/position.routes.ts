@@ -4,6 +4,7 @@ import { DeletePositionController } from "../../../../modules/positions/useCases
 import { ListPositionController } from "../../../../modules/positions/useCases/listPosition/ListPositionController";
 import { SinglePositionController } from "../../../../modules/positions/useCases/singlePosition/SinglePositionController";
 import { UpdatePositionController } from "../../../../modules/positions/useCases/updatePosition/UpdatePositionController";
+import { ensureAdmin } from "../middlewares/ensureAdmin";
 import ensureAuthenticated from "../middlewares/ensureAuthenticated";
 
 const positionRouter = Router();
@@ -14,16 +15,17 @@ const deletePositionController = new DeletePositionController()
 const updatePositionController = new UpdatePositionController()
 
 positionRouter.use(ensureAuthenticated)
+// positionRouter.use(ensureAdmin)
 
-positionRouter.post("/", createPositionController.handle);
+positionRouter.post("/", ensureAdmin, createPositionController.handle);
 
 positionRouter.get("/", listPositionController.handle);
 
 positionRouter.get("/:id", singlePositionController.handle);
 
-positionRouter.delete("/:id", deletePositionController.handle)
+positionRouter.delete("/:id", ensureAdmin, deletePositionController.handle)
 
-positionRouter.put("/:id", updatePositionController.handle)
+positionRouter.put("/:id", ensureAdmin, updatePositionController.handle)
 
 
 

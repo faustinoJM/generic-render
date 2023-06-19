@@ -24,7 +24,7 @@ class CreateUserUseCase {
         private companyRepository: ICompanyRepository
         ) {}
 
-    async execute({ name, email, password, company_id }: ICreateUserDTO) {
+    async execute({ name, email, password, is_admin, company_id }: ICreateUserDTO) {
         
         const UserAlreadyExists = await this.userRepository.findByEmail(email);
 
@@ -39,7 +39,7 @@ class CreateUserUseCase {
         }
 
         const passwordCHash = await hash(password, 8);
-        await this.userRepository.create({ name, password: passwordCHash, email, company_id});
+        await this.userRepository.create({ name, password: passwordCHash, email, is_admin, company_id});
 
     }
 }

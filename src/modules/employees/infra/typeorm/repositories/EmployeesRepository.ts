@@ -65,9 +65,17 @@ class EmployeesRepository implements IEmployeesRepository {
             social_security,
             syndicate_status, inss_status
         });
-        
-        await this.repository.save(user);
+
+        const userExists = await this.findByName(user.name, user.bi, user.company_id)
+
+        if (userExists) {
+          user.id = userExists.id
+          await this.repository.save(user);
+        } else {
+          await this.repository.save(user);
+        }        
     }
+
     async findByName(name: string, bi: string, company_id: string): Promise<Employee | null> {
         const user = await this.repository.findOne({ 
           where: { name, bi, company_id }
@@ -108,6 +116,14 @@ class EmployeesRepository implements IEmployeesRepository {
 
     async delete(id: string): Promise<void> {
       await this.repository.delete(id)
+    }
+  
+    async findByName2(name: string, company_id: string): Promise<Employee| null> {
+      const user = await this.repository.findOne({ 
+        where: { name, company_id }
+       });
+
+      return user;
     }
 
 }

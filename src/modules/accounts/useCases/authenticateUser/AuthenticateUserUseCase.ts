@@ -23,7 +23,8 @@ interface TokenPayload {
 interface IResponse{
     user: {
         name: string,
-        email: string
+        email: string,
+        is_admin: boolean
     },
     token: string,
     refresh_token: string
@@ -99,6 +100,7 @@ class AuthenticateUserUseCase {
             user: {
                 name: user.name,
                 email: user.email,
+                is_admin: user.is_admin
             },
             token,
             refresh_token

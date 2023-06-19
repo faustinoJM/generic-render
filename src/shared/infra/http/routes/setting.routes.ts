@@ -4,6 +4,7 @@ import { CreateSettingController } from "../../../../modules/settings/useCases/c
 import { ListSettingController } from "../../../../modules/settings/useCases/listSetting/ListSettingController";
 import ensureAuthenticated from "../middlewares/ensureAuthenticated";
 import uploadConfig from "../../../../config/upload"
+import { ensureAdmin } from "../middlewares/ensureAdmin";
 
 
 const settingRouter = Router();
@@ -15,7 +16,7 @@ const uploadCompanyLogo = multer(uploadConfig)
 
 settingRouter.use(ensureAuthenticated)
 
-settingRouter.post("/", uploadCompanyLogo.array("logo"), createSettingController.handle);
+settingRouter.post("/", ensureAdmin, uploadCompanyLogo.array("logo"), createSettingController.handle);
 
 
 settingRouter.get('/', listSettingController.handle)
