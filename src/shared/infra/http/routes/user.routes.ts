@@ -15,14 +15,16 @@ const deleteUserController = new DeleteUserController()
 const updateUserController = new UpdateUserController()
 const listUserCompanyController = new ListUserCompanyController();
 
-userRouter.post("/", ensureAdmin, createUserController.handle);
-
 userRouter.get("/", listUserController.handle);
 
 userRouter.get("/company", ensureAuthenticated, listUserCompanyController.handle);
 
-userRouter.delete("/:id", ensureAdmin, deleteUserController.handle)
+// userRouter.use(ensureAdmin)
 
-userRouter.put("/:id", ensureAdmin, updateUserController.handle)
+userRouter.post("/", createUserController.handle);
+
+userRouter.delete("/:id", deleteUserController.handle)
+
+userRouter.put("/:id", updateUserController.handle)
 
 export { userRouter };
