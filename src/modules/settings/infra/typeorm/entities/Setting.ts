@@ -147,8 +147,8 @@ class Setting {
   companyLogoURL: string;
 
   getCompanyLogoURL(): string {
-    return `http://localhost:3333/companyy-logo/${this.company_logo_name}`
-    // return `https://generic-render-production.up.railway.app/companyy-logo/${this.company_logo_name}`
+    // return `http://localhost:3333/companyy-logo/${this.company_logo_name}`
+    return `https://generic-render-production.up.railway.app/companyy-logo/${this.company_logo_name}`
     // return `https://elint-payroll-images.s3.us-east-1.amazonaws.com/company/${this.company_logo_name}`
   }
 
