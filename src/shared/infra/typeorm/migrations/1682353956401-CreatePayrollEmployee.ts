@@ -206,6 +206,16 @@ export class CreatePayrollEmployee1682353956401 implements MigrationInterface {
             isNullable: true
           },
           {
+            name: "inss_event",
+            type: "int",
+            isNullable: true
+          },
+          {
+            name: "inss_event_date",
+            type: "timestamp",
+            isNullable: true
+          },
+          {
             name: 'created_at',
             type: "timestamp",
             default: "now()"

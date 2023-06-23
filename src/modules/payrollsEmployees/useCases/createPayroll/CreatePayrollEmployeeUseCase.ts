@@ -96,6 +96,7 @@ class CreatePayrollEmployeeUseCase {
         const cash_advances = 0;
         const backpay = 0;
         const bonus = 0;
+        const inss_event = 0;
         const month_total_workdays = settings?.payroll_month_total_workdays ?? 30;
         const day_total_workhours = settings?.payroll_day_total_workhours ?? 8;
         const syndicate_tax = settings?.payroll_syndicate_tax ?? 1;
@@ -168,6 +169,7 @@ class CreatePayrollEmployeeUseCase {
             subsidy_medical: employee.subsidy_medical ?? 0,
             subsidy_vacation: employee.subsidy_vacation ?? 0,
             salary_thirteenth: employee.salary_thirteenth ?? 0,
+            inss_event,
             tabelaSalario: retornarTabela(+total_income!, employee.dependents),
             payrollDemo: retornarPayrollDemo(+employee.salary, overtime50,
               overtime100, +month_total_workdays, +day_total_workhours, absences,

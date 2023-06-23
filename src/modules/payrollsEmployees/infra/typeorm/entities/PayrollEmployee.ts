@@ -137,6 +137,12 @@ class PayrollEmployee {
     @Column()
     total_income: string;
 
+    @Column()
+    inss_event: number;
+
+    @UpdateDateColumn()
+    inss_event_date: Date
+
     @CreateDateColumn()
     created_at: Date
 

@@ -55,6 +55,8 @@ interface ICreatePayrollEmployeeDTO {
   total_inss_company?: string
   total_irps?: string
   syndicate_employee?: string;
+  inss_event?: number
+  inss_event_date?: Date;
   created_at?: Date;
   tabelaSalario?: ISalario;
   payrollDemo?: IPayrollDemo;

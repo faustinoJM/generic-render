@@ -8,6 +8,8 @@ import { ICreatePayrollEmployeeDTO } from "../../dtos/ICreatePayrollEmployeeDTO"
 import { IPayrollEmployeeRepository } from "../../repositories/IPayrollEmployeeRepository";
 import { IPayrollRepository } from "../../../payrolls/repositories/IPayrollRepository";
 import ISettingRepository from "../../../settings/repositories/ISettingRepository";
+import { NumValues } from "aws-sdk/clients/amplifyuibuilder";
+import { IDateProvider } from "../../../../shared/container/provider/DateProvider/IDateProvider";
 
 export interface ISalario {
   salarioLiquido?: number;
@@ -67,6 +69,8 @@ interface IRequestList {
   subsidy_medical?: number;
   subsidy_vacation?: number;
   salary_thirteenth?: number;
+  inss_event?: number;
+  inss_event_date?: Date;
 }
 
 
@@ -92,7 +96,7 @@ class InputPayrollEmployeeUseCase {
         private departmentsRepository: IDepartmentsRepository,
 
         @inject("SettingsRepository")
-        private settingsRepository: ISettingRepository
+        private settingsRepository: ISettingRepository,
         ) {}
 
     async execute({ id, user_id, overtime50, overtime100,
@@ -104,6 +108,8 @@ class InputPayrollEmployeeUseCase {
                     subsidy_medical,
                     subsidy_vacation,
                     salary_thirteenth,
+                    inss_event,
+                    inss_event_date,
                     }: IRequestList) {
 
         const user = await this.userRepository.findById(user_id as any)
@@ -125,7 +131,7 @@ class InputPayrollEmployeeUseCase {
           throw new AppError("Payroll doesn't exists")
         }
 
-        if (absences! >= 0)
+        if (absences! >= 0 && absences! <= 30)
           absences = absences //absences = absences ?? +payroll.absences 
         else
           absences = +payrollEmployee.absences 
@@ -149,6 +155,15 @@ class InputPayrollEmployeeUseCase {
           bonus = bonus
         else 
           bonus = +payrollEmployee.bonus
+        if (payrollEmployee.absences === 0 && (+inss_event!) === 10)
+          inss_event = payrollEmployee.inss_event
+        if (payrollEmployee.absences > 0 && (+inss_event!) === 0)
+          inss_event = payrollEmployee.inss_event
+        if (absences! > 0 && payrollEmployee.inss_event === 0)
+          inss_event = 10
+        if (inss_event! < 0 || inss_event! > 10)
+          inss_event = payrollEmployee.inss_event
+
 
         subsidy! >= 0 ? subsidy = subsidy : subsidy = +payrollEmployee.subsidy;
         subsidy_transport! >= 0 ? subsidy_transport = subsidy_transport : subsidy_transport = +payrollEmployee.subsidy_transport;
@@ -187,8 +202,8 @@ class InputPayrollEmployeeUseCase {
           let INSS_Company = retornarINSS_Company(+total_income, employee.inss_status)
           let syndicate_employee = retornarSyndicate_Tax(total_income, syndicate_tax, employee.syndicate_status)
           let salary_liquid = calcularSalarioLiquido(+total_income!, IRPS, INSS_Employee, +cash_advances!, syndicate_employee)
-          
-         let employeePayroll: ICreatePayrollEmployeeDTO = {
+         
+          let employeePayroll: ICreatePayrollEmployeeDTO = {
             id: payrollEmployee.id,
             payroll_id: payrollEmployee.payroll_id,
             employee_id: employee.id,
@@ -228,6 +243,8 @@ class InputPayrollEmployeeUseCase {
             subsidy_medical: subsidy_medical as any,
             subsidy_vacation: subsidy_vacation as any,
             salary_thirteenth: salary_thirteenth as any,
+            inss_event: inss_event,
+            // inss_event_date: new Date(Date.now()).toISOString() as any,
             tabelaSalario: retornarTabela(+total_income!, employee.dependents),
             payrollDemo: retornarPayrollDemo(+employee.salary, overtime50,
               overtime100, +payrollEmployee.month_total_workdays, +payrollEmployee.day_total_workhours, absences,

@@ -54,7 +54,8 @@ class PayrollEmployeeRepository implements IPayrollEmployeeRepository {
       bank_account,
       nib,
       social_security,
-      nuit,}: ICreatePayrollEmployeeDTO): Promise<void> {
+      nuit,
+      inss_event, inss_event_date}: ICreatePayrollEmployeeDTO): Promise<void> {
 
       const payroll =  this.repository.create({
           id,
@@ -99,7 +100,7 @@ class PayrollEmployeeRepository implements IPayrollEmployeeRepository {
           bank_account,
           nib,
           social_security,
-          nuit,
+          nuit, inss_event, inss_event_date
         });
         
         await this.repository.save(payroll);
