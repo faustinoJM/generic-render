@@ -13,17 +13,19 @@ class PayrollRepository implements IPayrollRepository {
     }
     
     async create({ id,
-      company_id,
-      month,
-      year,
-      total_employee,
-      flag}: ICreatePayrollDTO): Promise<Payroll> {
+                  company_id,
+                  month,
+                  year,
+                  total_employee,
+                  payroll_status,
+                  flag}: ICreatePayrollDTO): Promise<Payroll> {
         const payroll =  this.repository.create({
           id,
           company_id,
           month,
           year,
           total_employee,
+          payroll_status,
           flag
         });
         

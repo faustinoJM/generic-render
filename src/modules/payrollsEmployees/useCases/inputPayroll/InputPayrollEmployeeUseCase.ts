@@ -62,13 +62,16 @@ interface IRequestList {
   tabelaSalario?: ISalario;
   payrollDemo?: IPayrollDemo;
   syndicate_employee: number;
+  ipa_employee?: number
   subsidy?: number;
   subsidy_transport?: number;
   subsidy_food?: number;
   subsidy_residence?: number;
   subsidy_medical?: number;
   subsidy_vacation?: number;
+  subsidy_shift?: number
   salary_thirteenth?: number;
+  salary_fourteenth?: number,
   inss_event?: number;
   inss_event_date?: Date;
 }
@@ -107,7 +110,10 @@ class InputPayrollEmployeeUseCase {
                     subsidy_residence,
                     subsidy_medical,
                     subsidy_vacation,
+                    subsidy_shift,
                     salary_thirteenth,
+                    salary_fourteenth,
+                    ipa_employee,
                     inss_event,
                     inss_event_date,
                     }: IRequestList) {
@@ -126,34 +132,45 @@ class InputPayrollEmployeeUseCase {
         const departments = await this.departmentsRepository.list(user.company_id)  
         const settings = await this.settingsRepository.list(user.company_id,)
         const payrollEmployee = await this.payrollEmployeeRepository.findById(id as string, user.company_id);
-        
-        if(!payrollEmployee) {
+
+        if (!payrollEmployee) {
           throw new AppError("Payroll doesn't exists")
         }
 
-        if (absences! >= 0 && absences! <= 30)
-          absences = absences //absences = absences ?? +payroll.absences 
-        else
+        if(employees.length <= 0) {
+          throw new AppError("Employees Doesn't Exists");
+        }
+
+        const employee =  employees.find(employee => employee.id === payrollEmployee.employee_id)
+
+        const payroll = payrolls.find(data => data.id === payrollEmployee.payroll_id)
+
+        if (!payroll) {
+          throw new AppError("Payroll doesn't exists")
+        }
+
+        if (payroll.payroll_status === "true")
+          throw new AppError("Payroll is Locked")
+
+        function positionName(positionId: string) {
+          return positions.find((position) => position.id === positionId)
+        }
+  
+        function departmentName(departmentId: string) {
+          return departments.find((department) => department.id === departmentId)
+        }
+
+        if (absences! < 0 || absences! > 30)
           absences = +payrollEmployee.absences 
-        if (overtime50! >= 0) 
-          overtime50 = overtime50
-        else 
+        if (overtime50! <= 0) 
           overtime50 = +payrollEmployee.overtime50
-        if (overtime100! >= 0) 
-          overtime100 = overtime100
-        else 
+        if (overtime100! <= 0) 
           overtime100 = +payrollEmployee.overtime100
-        if (cash_advances! >= 0) 
-          cash_advances = cash_advances
-        else 
+        if (cash_advances! <= 0 || cash_advances! >= +payrollEmployee.salary_base) 
           cash_advances = +payrollEmployee.cash_advances
-        if (backpay! >= 0) 
-          backpay = backpay
-        else 
+        if (backpay! <= 0) 
           backpay = +payrollEmployee.backpay
-        if (bonus! >= 0) 
-          bonus = bonus
-        else 
+        if (bonus! <= 0) 
           bonus = +payrollEmployee.bonus
         if (payrollEmployee.absences === 0 && (+inss_event!) === 10)
           inss_event = payrollEmployee.inss_event
@@ -163,6 +180,13 @@ class InputPayrollEmployeeUseCase {
           inss_event = 10
         if (inss_event! < 0 || inss_event! > 10)
           inss_event = payrollEmployee.inss_event
+        
+        if (employee?.vacation! > +absences!)
+          this.employeeRepository.create({id: employee?.id!, name: employee?.name!, salary: employee?.salary!,
+            dependents: employee?.dependents!, bi: employee?.bi!, vacation: employee?.vacation! - absences!})
+        else
+          this.employeeRepository.create({id: employee?.id!, name: employee?.name!, salary: employee?.salary!,
+            dependents: employee?.dependents!, bi: employee?.bi!, vacation: 0})
 
 
         subsidy! >= 0 ? subsidy = subsidy : subsidy = +payrollEmployee.subsidy;
@@ -171,23 +195,12 @@ class InputPayrollEmployeeUseCase {
         subsidy_residence! >= 0 ? subsidy_residence = subsidy_residence : subsidy_residence = +payrollEmployee.subsidy_residence;
         subsidy_medical! >= 0 ? subsidy_medical = subsidy_medical : subsidy_medical = +payrollEmployee.subsidy_medical;
         subsidy_vacation! >= 0 ? subsidy_vacation = subsidy_vacation : subsidy_vacation = +payrollEmployee.subsidy_vacation;
+        subsidy_shift! >= 0 ? subsidy_shift = subsidy_shift : subsidy_shift = +payrollEmployee.subsidy_shift;
         salary_thirteenth! >= 0 ? salary_thirteenth = salary_thirteenth : salary_thirteenth = +payrollEmployee.salary_thirteenth;
-  
+        salary_fourteenth! >= 0 ? salary_fourteenth = salary_fourteenth : salary_fourteenth = +payrollEmployee.salary_fourteenth;
+        ipa_employee! >= 0 ? ipa_employee = ipa_employee : ipa_employee = +payrollEmployee.ipa_employee;
+
         const syndicate_tax = settings?.payroll_syndicate_tax ?? 1;
-
-        if(employees.length <= 0) {
-            throw new AppError("Employees Doesn't Exists");
-        }
-
-        function positionName(positionId: string) {
-          return positions.find((position) => position.id === positionId)
-        }
-
-        function departmentName(departmentId: string) {
-          return departments.find((department) => department.id === departmentId)
-        }
-
-        const employee =  employees.find(employee => employee.id === payrollEmployee.employee_id)
           // console.log(employee)
         if(employee) {
 

@@ -29,14 +29,13 @@ class CreatePositionUseCase {
 
       const positionAlreadyExists = await this.positionsRepository.findByName(name, user.company_id);
 
-
         if(positionAlreadyExists) {
             throw new AppError("Position Already Exists");
         }
 
+        const position = await this.positionsRepository.create({ name, description, company_id: user.company_id });
 
-        await this.positionsRepository.create({ name, description, company_id: user.company_id });
-
+        return position;
     }
 }
 

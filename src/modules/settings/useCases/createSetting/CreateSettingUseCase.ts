@@ -88,7 +88,8 @@ class CreateSettingUseCase {
               column_salary_thirteenth: data.column_salary_thirteenth,
               column_salary_fourteenth: data.column_salary_fourteenth,
               payslip_comment: data.payslip_comment,
-              language_options: data.language_options,              
+              language_options: data.language_options,  
+              column_loan: data.column_loan,            
               flag: data.flag,
               company_logo_name: file_logo_name ?? settingAlreadyExists.company_logo_name,
               // payroll_inss_employee_tax: data.payroll_inss_employee_tax,
@@ -118,6 +119,7 @@ class CreateSettingUseCase {
             data.column_subsidy_vacation = data.column_subsidy_vacation ?? "false"
             data.column_salary_thirteenth = data.column_salary_thirteenth ?? "false"
             data.column_salary_fourteenth = data.column_salary_fourteenth ?? "false"
+            data.column_loan = data.column_loan ?? "false"
           await this.settingRepository.create(data);
         }
 

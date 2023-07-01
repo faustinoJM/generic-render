@@ -44,6 +44,7 @@ export default interface ICreateSettingDTO {
   column_salary_fourteenth?: string
   payslip_comment?: string
   language_options?: string;
+  column_loan?: string;
   flag?: number;
   company_logo_multer?: string[];
   CompanyLogoURL?: string;

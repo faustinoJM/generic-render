@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { container } from "tsyringe";
-import { User } from "../../infra/typeorm/entities/User";
+import { User } from "../../../infra/typeorm/entities/User";
 import { ListUserCompanyUseCase } from "./ListUserCompanyUseCase";
 
 interface IList {
@@ -13,7 +13,6 @@ class ListUserCompanyController {
         const user_id = request.user?.id;
 
         const listUserCompanyUseCase = container.resolve(ListUserCompanyUseCase);
-        console.log("441",user_id)
 
         const users = await listUserCompanyUseCase.execute(user_id)
         let users2: IList[] = users;

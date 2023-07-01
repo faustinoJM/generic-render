@@ -78,6 +78,9 @@ class Employee {
     subsidy_vacation: string;
 
     @Column()
+    subsidy_shift: string
+
+    @Column()
     salary_thirteenth: string;
 
     @Column()
@@ -120,7 +123,16 @@ class Employee {
     syndicate_status: string;
 
     @Column()
+    ipa_employee: string
+
+    @Column()
     inss_status: string;
+
+    @Column()
+    employee_loan: string;
+
+    @Column()
+    loan_deduction: string;
 
     @CreateDateColumn()
     created_at: Date

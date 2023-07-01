@@ -133,6 +133,9 @@ class Setting {
   column_salary_fourteenth: string
 
   @Column()
+  column_loan: string;
+
+  @Column()
   language_options: string
 
   @Column()

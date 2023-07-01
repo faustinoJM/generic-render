@@ -56,6 +56,7 @@ class SettingsRepository implements ISettingRepository {
           column_salary_fourteenth,
           payslip_comment,
           language_options,
+          column_loan,
           flag,
 
     }: ICreateSettingDTO): Promise<Setting> {
@@ -105,6 +106,7 @@ class SettingsRepository implements ISettingRepository {
           column_salary_fourteenth,
           payslip_comment,
           language_options,
+          column_loan,
           flag,
       })
 

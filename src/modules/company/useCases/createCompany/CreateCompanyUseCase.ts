@@ -19,8 +19,9 @@ class CreateCompanyUseCase {
           throw new AppError("Company already Exists")
         } 
         
-        await this.companyRepository.create(data);
+        const company = await this.companyRepository.create(data);
         
+        return company
 
     }
 }

@@ -222,6 +222,11 @@ export class CreateSettings1680599503894 implements MigrationInterface {
             isNullable: true,
           },
           {
+            name: "column_loan",
+            type: "varchar",
+            isNullable: true,
+          },
+          {
             name: "language_options",
             type: "varchar",
             isNullable: true,

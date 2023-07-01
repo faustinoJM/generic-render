@@ -12,7 +12,7 @@ class CreateDepartmentController {
 
         await createDepartmentUseCase.execute({ name, description, user_id })
 
-        return response.status(201).send();
+        return response.status(201).json(createDepartmentUseCase);
     }
 }
 

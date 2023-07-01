@@ -27,6 +27,8 @@ class UpdateEmployeeController {
       bank_account,
       nib,
       social_security,
+      employee_loan,
+      loan_deduction,
       syndicate_status, inss_status} = request.body;
     const id = request.params.id;
 
@@ -53,6 +55,8 @@ class UpdateEmployeeController {
       bank_account,
       nib,
       social_security, 
+      employee_loan,
+      loan_deduction,
       syndicate_status, inss_status})
       // console.log("++++++++", employee)
 

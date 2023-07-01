@@ -7,6 +7,7 @@ interface ICreateUserDTO {
     is_admin?: boolean;
     company_id?: string;
     company_name?: string;
+    user_id?: string;
 
 }
 

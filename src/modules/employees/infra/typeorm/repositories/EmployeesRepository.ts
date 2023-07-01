@@ -29,6 +29,7 @@ class EmployeesRepository implements IEmployeesRepository {
       subsidy_residence,
       subsidy_medical,
       subsidy_vacation,
+      subsidy_shift,
       salary_thirteenth,
       start_date,
       employee_status,
@@ -36,6 +37,9 @@ class EmployeesRepository implements IEmployeesRepository {
       bank_account,
       nib,
       social_security,
+      ipa_employee,
+      employee_loan,
+      loan_deduction,
       syndicate_status, inss_status}: ICreateEmployeeDTO): Promise<void> {
         const user =  this.repository.create({
             id, company_id, employee_number, name, salary, dependents, position_id, department_id, birth_date,
@@ -56,6 +60,7 @@ class EmployeesRepository implements IEmployeesRepository {
             subsidy_residence,
             subsidy_medical,
             subsidy_vacation,
+            subsidy_shift,
             salary_thirteenth,
             start_date,
             employee_status,
@@ -63,8 +68,13 @@ class EmployeesRepository implements IEmployeesRepository {
             bank_account,
             nib,
             social_security,
+            ipa_employee,
+            employee_loan,
+            loan_deduction,
             syndicate_status, inss_status
         });
+
+        // console.log("007", bi, "//", name)
 
         const userExists = await this.findByName(user.name, user.bi, user.company_id)
 
@@ -78,7 +88,7 @@ class EmployeesRepository implements IEmployeesRepository {
 
     async findByName(name: string, bi: string, company_id: string): Promise<Employee | null> {
         const user = await this.repository.findOne({ 
-          where: { name, bi, company_id }
+          where: { name: name, bi: bi, company_id: company_id}
          });
 
         return user;

@@ -22,7 +22,7 @@ class CreateCompanyController {
 
         const createCompanyUseCase = container.resolve(CreateCompanyUseCase);
 
-        await createCompanyUseCase.execute({ 
+        const company = await createCompanyUseCase.execute({ 
           company_name, 
           company_contact,
           company_email,
@@ -36,7 +36,7 @@ class CreateCompanyController {
           company_bank_account,
          })
 
-        return response.status(201).send();
+        return response.status(201).json(company);
     }
 }
 

@@ -22,8 +22,11 @@ class InputPayrollEmployeeController {
           subsidy_residence,
           subsidy_medical,
           subsidy_vacation,
+          subsidy_shift,
           salary_thirteenth,
+          salary_fourteenth,
           syndicate_employee,
+          ipa_employee,
           inss_event, 
           inss_event_date} = request.body;
           const id = request.params.id;
@@ -48,8 +51,11 @@ class InputPayrollEmployeeController {
           subsidy_residence,
           subsidy_medical,
           subsidy_vacation,
+          subsidy_shift,
           salary_thirteenth,
+          salary_fourteenth,
           syndicate_employee,
+          ipa_employee,
           inss_event,
           inss_event_date})
 

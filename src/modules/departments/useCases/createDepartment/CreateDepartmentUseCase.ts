@@ -35,8 +35,9 @@ class CreateDepartmentUseCase {
         if(departmentAlreadyExists) {
             throw new AppError("Department Already Exists");
         }
-        await this.departmentsRepository.create({ name, description, company_id: user.company_id });
+        const department = await this.departmentsRepository.create({ name, description, company_id: user.company_id });
 
+        return department;
     }
 }
 

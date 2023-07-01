@@ -40,7 +40,9 @@ interface ICreatePayrollEmployeeDTO {
   subsidy_residence?: string;
   subsidy_medical?: string;
   subsidy_vacation?: string;
+  subsidy_shift?: string;
   salary_thirteenth?: string;
+  salary_fourteenth?: string;
   irps?:  string;
   inss_employee?: string;
   inss_company?: string;
@@ -55,8 +57,11 @@ interface ICreatePayrollEmployeeDTO {
   total_inss_company?: string
   total_irps?: string
   syndicate_employee?: string;
+  ipa_employee?: string;
   inss_event?: number
   inss_event_date?: Date;
+  employee_loan?: string;
+  loan_deduction?: string;
   created_at?: Date;
   tabelaSalario?: ISalario;
   payrollDemo?: IPayrollDemo;

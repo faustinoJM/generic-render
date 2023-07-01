@@ -127,28 +127,33 @@ export class CreatePayrollEmployee1682353956401 implements MigrationInterface {
           {
             name: "subsidy_transport",
             type: "double precision",
-            // isNullable: true,
+            isNullable: true,
           },
           {
             name: "subsidy_food",
             type: "double precision",
-            // isNullable: true,
+            isNullable: true,
           },
           {
             name: "subsidy_residence",
             type: "double precision",
-            // isNullable: true,
+            isNullable: true,
           },
           {
             name: "subsidy_medical",
             type: "double precision",
-            // isNullable: true,
+            isNullable: true,
           }, 
           {
             name: "subsidy_vacation",
             type: "double precision",
-            // isNullable: true,
+            isNullable: true,
           }, 
+          {
+            name: "subsidy_shift",
+            type: "double precision",
+            isNullable: true,
+          },
           {
             name: "salary_thirteenth",
             type: "double precision",
@@ -216,6 +221,21 @@ export class CreatePayrollEmployee1682353956401 implements MigrationInterface {
             isNullable: true
           },
           {
+            name: "ipa_employee",
+            type: "double precision",
+            isNullable: true,
+          },
+          {
+            name: "employee_loan",
+            type: "double precision",
+            isNullable: true,
+          },
+          {
+            name: "loan_deduction",
+            type: "double precision",
+            isNullable: true,
+          },
+          {
             name: 'created_at',
             type: "timestamp",
             default: "now()"
@@ -258,7 +278,7 @@ export class CreatePayrollEmployee1682353956401 implements MigrationInterface {
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
-    await queryRunner.dropTable('payroll_employee')
+    await queryRunner.dropTable('payrolls_employees')
   }
 
 }

@@ -77,7 +77,6 @@ class CreatePayrollEmployeeUseCase {
 
         // const AlreadyYearMonth = payrollYearMonth.find((data) => ((data.month === month) && (data.year === +year)))
         
-       console.log("spdsp", payrollYearMonth)
         // if(AlreadyYearMonth) 
         if(payrollYearMonth) {
           throw new AppError("O mes ja esta Pago")
@@ -87,7 +86,7 @@ class CreatePayrollEmployeeUseCase {
           throw new AppError("Employees Doesn't Exists");
         }
 
-        const payrollCreated = await this.payrollRepository.create({month, year, company_id: user.company_id})
+        const payrollCreated = await this.payrollRepository.create({month, year, payroll_status: "false", company_id: user.company_id})
 
         //initial values
         const overtime50 = 0;
@@ -100,10 +99,6 @@ class CreatePayrollEmployeeUseCase {
         const month_total_workdays = settings?.payroll_month_total_workdays ?? 30;
         const day_total_workhours = settings?.payroll_day_total_workhours ?? 8;
         const syndicate_tax = settings?.payroll_syndicate_tax ?? 1;
-       
-
-        console.log("150", month_total_workdays)
-        console.log("151", day_total_workhours)
 
         function positionName(positionId: string) {
           return positions.find((position) => position.id === positionId)
@@ -119,13 +114,13 @@ class CreatePayrollEmployeeUseCase {
           let total_overtime = calcTotalHorasExtras(base_hour, overtime50!, overtime100!)
           let total_absences = calcTotalFaltas(absences!, base_day)
           let total_subsidio = ((+employee.subsidy)! + (+employee.subsidy_transport) + (+employee.subsidy_food) + (+employee.subsidy_residence) + 
-                            (+employee.subsidy_medical) + (+employee.subsidy_vacation))
+                            (+employee.subsidy_medical) + (+employee.subsidy_vacation) + (+employee.subsidy_shift))
           let total_income = +calcTotalSalarioBruto(+employee.salary, total_overtime!, total_absences, +backpay!, +bonus, total_subsidio, +employee.salary_thirteenth).toFixed(2)
           let IRPS = retornarIRPS(+total_income!, employee.dependents) 
           let INSS_Employee = retornarINSS(+total_income!, employee.inss_status)
           let INSS_Company = retornarINSS_Company(total_income, employee.inss_status)
           let syndicate_employee = retornarSyndicate_Tax(total_income, syndicate_tax, employee.syndicate_status)
-          let salary_liquid = calcularSalarioLiquido(+total_income!, IRPS, INSS_Employee, +cash_advances!, syndicate_employee)
+          let salary_liquid = calcularSalarioLiquido(+total_income!, IRPS, INSS_Employee, +cash_advances!, syndicate_employee, +employee.ipa_employee)
           
          let employeePayroll: ICreatePayrollEmployeeDTO = {
             payroll_id: payrollCreated.id, //payroll_id ?? payrollCreated.id,
@@ -163,12 +158,15 @@ class CreatePayrollEmployeeUseCase {
             inss_company: INSS_Company as any,
             total_inss: (INSS_Employee + INSS_Company) as any,
             syndicate_employee: syndicate_employee as any,
+            ipa_employee: employee.ipa_employee ?? 0,
             subsidy_transport: employee.subsidy_transport ?? 0,
             subsidy_food: employee.subsidy_food ?? 0,
             subsidy_residence: employee.subsidy_residence ?? 0,
             subsidy_medical: employee.subsidy_medical ?? 0,
             subsidy_vacation: employee.subsidy_vacation ?? 0,
+            subsidy_shift: employee.subsidy_shift ?? 0,
             salary_thirteenth: employee.salary_thirteenth ?? 0,
+            salary_fourteenth: 0 as any,
             inss_event,
             tabelaSalario: retornarTabela(+total_income!, employee.dependents),
             payrollDemo: retornarPayrollDemo(+employee.salary, overtime50,
@@ -466,13 +464,13 @@ function calcTotalFaltas(faltas: number, salarioEmDias: number) {
 }
 
 function calcTotalSalarioBruto(salario_base: number, totalHorasExtras: number,
-   totalDescontoFaltas: number, totalRetroativos: number, bonus: number, total_subsidio: number, salario_decimo_terceiro: number,) {
+   totalDescontoFaltas: number, totalRetroativos: number, bonus: number, total_subsidio: number, salario_decimo_terceiro: number) {
     
   return salario_base + totalHorasExtras - totalDescontoFaltas + totalRetroativos + bonus + total_subsidio + salario_decimo_terceiro;
 }
 
-function calcularSalarioLiquido(totalSalario: number, IRPS: number, INSS_Employee: number, totalAdiantamento: number, syndicate_employee: number) {
-  return totalSalario - IRPS - INSS_Employee - totalAdiantamento - syndicate_employee;
+function calcularSalarioLiquido(totalSalario: number, IRPS: number, INSS_Employee: number, totalAdiantamento: number, syndicate_employee: number, ipa_employee: number) {
+  return totalSalario - IRPS - INSS_Employee - totalAdiantamento - syndicate_employee - ipa_employee;
 }
 
 

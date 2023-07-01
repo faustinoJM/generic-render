@@ -25,6 +25,7 @@ class CreateEmployeeController {
           subsidy_residence,
           subsidy_medical,
           subsidy_vacation,
+          subsidy_shift,
           salary_thirteenth,
           department,
           position,
@@ -34,6 +35,8 @@ class CreateEmployeeController {
           bank_account,
           nib,
           social_security,
+          employee_loan,
+          loan_deduction,
           syndicate_status, inss_status} = request.body;
 
 
@@ -57,6 +60,7 @@ class CreateEmployeeController {
           subsidy_residence,
           subsidy_medical,
           subsidy_vacation,
+          subsidy_shift,
           salary_thirteenth,
           department,
           position,
@@ -66,6 +70,8 @@ class CreateEmployeeController {
           bank_account,
           nib,
           social_security,
+          employee_loan,
+          loan_deduction,
           syndicate_status, inss_status})
 
         return response.status(201).send();

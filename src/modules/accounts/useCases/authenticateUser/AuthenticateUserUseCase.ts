@@ -69,7 +69,7 @@ class AuthenticateUserUseCase {
         const passwordMatch = await compare(password, user.password)
         // console.log(passwordMatch)
         if(!passwordMatch) {
-            throw new AppError("Email or Password !")
+            throw new AppError("Email or Password incorrect!")
         }
         //Gerar jsonwebtoken
         const token = sign({company_name: company.company_name, company_id: user.company_id}, secret_token, {

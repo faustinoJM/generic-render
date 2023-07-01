@@ -1,7 +1,7 @@
 import { Router } from "express";
 import { CreatePayrollEmployeeController } from "../../../../modules/payrollsEmployees/useCases/createPayroll/CreatePayrollEmployeeController";
 import { DeletePayrollEmployeeController } from "../../../../modules/payrollsEmployees/useCases/deletePayroll/DeletePayrollEmployeeController";
-import { ImportExcelController } from "../../../../modules/payrollsEmployees/useCases/importExcel/ImportExcelController";
+import { ImportExcelController } from "../../../../modules/employees/useCases/importExcel/ImportExcelController";
 import { InputPayrollEmployeeController } from "../../../../modules/payrollsEmployees/useCases/inputPayroll/InputPayrollEmployeeController";
 import { OutputAllController } from "../../../../modules/payrollsEmployees/useCases/listAllSAP/OutputAllController";
 import { ListInputPayrollEmployeeController } from "../../../../modules/payrollsEmployees/useCases/ListInputPayroll/ListInputPayrollEmployeeController";
@@ -34,7 +34,7 @@ payrollEmployeeRouter.get("/input/:id", ensureAdmin, listInputPayrollController.
 payrollEmployeeRouter.get("/:id", singlePayrollController.handle);
 payrollEmployeeRouter.put("/:id", ensureAdmin, inputPayrollController.handle);
 payrollEmployeeRouter.delete("/", ensureAdmin, deletePayrollController.handle)
-payrollEmployeeRouter.post("/excel/import", ensureAdmin, importExcelController.handle)
+// payrollEmployeeRouter.post("/excel/import", ensureAdmin, importExcelController.handle)
 
 
 

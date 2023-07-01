@@ -131,6 +131,11 @@ export class CreateEmployee1680599423740 implements MigrationInterface {
             isNullable: true,
           }, 
           {
+            name: "subsidy_shift",
+            type: "double precision",
+            isNullable: true,
+          }, 
+          {
             name: "salary_thirteenth",
             type: "double precision",
             isNullable: true,
@@ -176,8 +181,23 @@ export class CreateEmployee1680599423740 implements MigrationInterface {
             isNullable: true,
           },
           {
+            name: "ipa_employee",
+            type: "varchar",
+            isNullable: true,
+          },
+          {
             name: "inss_status",
             type: "varchar",
+            isNullable: true,
+          },
+          {
+            name: "employee_loan",
+            type: "double precision",
+            isNullable: true,
+          },
+          {
+            name: "loan_deduction",
+            type: "double precision",
             isNullable: true,
           },
           {

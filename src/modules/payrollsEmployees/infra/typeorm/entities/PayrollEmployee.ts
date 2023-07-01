@@ -117,10 +117,19 @@ class PayrollEmployee {
     subsidy_vacation: string;
 
     @Column()
+    subsidy_shift: string;
+
+    @Column()
     salary_thirteenth: string;
 
     @Column()
+    salary_fourteenth: string;
+
+    @Column()
     syndicate_employee: string;
+
+    @Column()
+    ipa_employee: string;
 
     @Column()
     irps: string;
@@ -142,6 +151,12 @@ class PayrollEmployee {
 
     @UpdateDateColumn()
     inss_event_date: Date
+
+    @Column()
+    employee_loan: string;
+
+    @Column()
+    loan_deduction: string;
 
     @CreateDateColumn()
     created_at: Date

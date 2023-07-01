@@ -35,6 +35,8 @@ class UpdateEmployeeUseCase {
     bank_account,
     nib,
     social_security,
+    employee_loan,
+    loan_deduction,
     syndicate_status, inss_status}: ICreateEmployeeDTO) {
 
     const user = await this.userRepository.findById(user_id as any)
@@ -72,6 +74,8 @@ class UpdateEmployeeUseCase {
       bank_account,
       nib,
       social_security,
+      employee_loan,
+      loan_deduction,
       syndicate_status, inss_status
     })
 

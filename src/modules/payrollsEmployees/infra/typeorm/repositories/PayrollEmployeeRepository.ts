@@ -42,7 +42,9 @@ class PayrollEmployeeRepository implements IPayrollEmployeeRepository {
       subsidy_residence,
       subsidy_medical,
       subsidy_vacation,
+      subsidy_shift,
       salary_thirteenth,
+      salary_fourteenth,
       bonus,
       irps,
       inss_employee,
@@ -55,6 +57,9 @@ class PayrollEmployeeRepository implements IPayrollEmployeeRepository {
       nib,
       social_security,
       nuit,
+      ipa_employee,
+      employee_loan,
+      loan_deduction,
       inss_event, inss_event_date}: ICreatePayrollEmployeeDTO): Promise<void> {
 
       const payroll =  this.repository.create({
@@ -88,7 +93,9 @@ class PayrollEmployeeRepository implements IPayrollEmployeeRepository {
           subsidy_residence,
           subsidy_medical,
           subsidy_vacation,
+          subsidy_shift,
           salary_thirteenth,
+          salary_fourteenth,
           bonus,
           irps,
           inss_employee,
@@ -100,6 +107,9 @@ class PayrollEmployeeRepository implements IPayrollEmployeeRepository {
           bank_account,
           nib,
           social_security,
+          ipa_employee,
+          employee_loan,
+          loan_deduction,
           nuit, inss_event, inss_event_date
         });
         

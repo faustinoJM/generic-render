@@ -24,6 +24,7 @@ interface ICreateEmployeeDTO {
   subsidy_residence?: string;
   subsidy_medical?: string;
   subsidy_vacation?: string;
+  subsidy_shift?: string
   salary_thirteenth?: string;
   department?: string;
   position?: string;
@@ -36,7 +37,10 @@ interface ICreateEmployeeDTO {
   user_id?: string;
   company_id?: string;
   syndicate_status?: string;
-  inss_status?: string
+  ipa_employee?: string;
+  inss_status?: string;
+  employee_loan?: string;
+  loan_deduction?: string;
 }
 
 export { ICreateEmployeeDTO };

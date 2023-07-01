@@ -2,11 +2,12 @@ import { container, inject, injectable } from "tsyringe";
 import AppError  from "../../../../shared/errors/AppError";
 import IPositionsRepository from "../../../positions/repositories/IPositionsRepository";
 import IDepartmentsRepository from "../../../departments/repositories/IDepartmentsRepository";
-import { IEmployeesRepository } from "../../../employees/repositories/IEmployeesRepository";
+import { IEmployeesRepository } from "../../repositories/IEmployeesRepository";
 import { IUsersRepository } from "../../../accounts/repositories/IUsersRepository";
 import { response } from "express";
 import { CreatePositionUseCase } from "../../../positions/useCases/createPosition/CreatePositionUseCase";
-import { CreateEmployeeUseCase } from "../../../employees/useCases/createEmployee/CreateEmployeeUseCase";
+import { CreateEmployeeUseCase } from "../createEmployee/CreateEmployeeUseCase";
+import { IDateProvider } from "../../../../shared/container/provider/DateProvider/IDateProvider";
 
 interface ICreatePayrollDTO2 {
   id?: string;
@@ -103,12 +104,16 @@ class ImportExcelUseCase {
         private positionsRepository: IPositionsRepository,
 
         @inject("DepartmentsRepository")
-        private departmentsRepository: IDepartmentsRepository) {}
+        private departmentsRepository: IDepartmentsRepository,
+        
+        @inject("DayjsDateProvider")
+        private dayjsDateProvider: IDateProvider,) {}
 
     async execute(user_id: string, data: any) {
         const user = await this.userRepository.findById(user_id as any)
         const createEmployeeUseCase = container.resolve(CreateEmployeeUseCase);
 
+        // const dateds = this.dayjsDateProvider.compareInDays(new Date(), new Date("2022/06/30"))
 
         if (!user) {
           throw new  AppError("User Auth doesn't Exists")
@@ -144,7 +149,7 @@ class ImportExcelUseCase {
             if (!findDepartment) 
               dataDepart.push(employee["department_id"])
 
-            // const findEmployee = dataEmployee.find((data) => (data.name === Object.values(d)[0]) && (data.bi === Object.values(d)[2]))
+            // const findEmployee = dataEmployee.find((data) => (data.name === Object.values(d)[0]) && (data.bi === Object.values(d)[4]))
             // if (!findEmployee) 
             //   dataEmployee.push(employee)
             // else
@@ -185,17 +190,19 @@ class ImportExcelUseCase {
           }
         });
 
-        // const findEmployee = dataEmployee.find((data) => (data.name === Object.values(d)[0]) && (data.bi === Object.values(d)[2]))
+        // const findEmployee = dataEmployee.find((data) => (data.name === Object.values(d)[0]) && (data.bi === Object.values(d)[4]))
         const findEmployeeByNameBi = dataEmployeeNameBi.find((name) => {
           let [nome, bi] = name.split("/");
-          return (nome === Object.values(d)[0]) && (bi ===Object.values(d)[2])
+          return (nome === Object.values(d)[0]) && (bi === Object.values(d)[4])
         })
 
-          dataEmployeeNameBi.push(`${Object.values(d)[0] as any}/${Object.values(d)[2] as any}`)
+        console.log("alert", Object.values(d)[4], "/", Object.values(d)[0])
+
+        dataEmployeeNameBi.push(`${Object.values(d)[0] as any}/${Object.values(d)[4] as any}`)
 
         if (!findEmployeeByNameBi) {
-          // let employeeRepo = employees.find(employee => (employee.name === Object.values(d)[0]) && (employee.bi === Object.values(d)[2]))
-          let employeeRepo = employees.find(employee => (employee.name === Object.values(d)[0]) && (employee.bi === Object.values(d)[2]))
+          // let employeeRepo = employees.find(employee => (employee.name === Object.values(d)[0]) && (employee.bi === Object.values(d)[4]))
+          let employeeRepo = employees.find(employee => (employee.name === Object.values(d)[0]) && (employee.bi === Object.values(d)[4]))
 
           if (!employeeRepo){
             let positionId = positions2.find(position => position.name === employee["position_id"])
@@ -207,6 +214,19 @@ class ImportExcelUseCase {
             employee.company_id = user.company_id 
             employee.inss_status = employee.inss_status ?? "true";
             employee.syndicate_status = employee.syndicate_status ?? "false";
+            // console.log("794", employee.start_date)
+            employee.vacation = this.dayjsDateProvider.compareInDays(new Date(), new Date(employee.start_date))
+            // console.log("794 Total", employee.vacation)
+
+            if (employee.vacation < 730)
+              employee.vacation = 12
+            else if (employee.vacation < 1095)
+              employee.vacation = 24
+            else if (employee.vacation >= 1095)
+              employee.vacation = 30
+            else
+              employee.vacation = 0
+
             try {
               await this.employeeRepository.create(employee)
             } catch(err){
@@ -269,5 +289,7 @@ const keyToPropMap = {
   "Nome do Banco": "bank_name",
   "Numero da Conta": "bank_account",
   "NIB": "nib",
-  "Numero de Seg. Social": "social_security"
+  "Numero de Seg. Social": "social_security",
+  "Emprestimo": "employee_loan",
+  "Deducao": "loan_deduction"
 };

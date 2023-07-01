@@ -14,7 +14,7 @@ class DepartmentsRepository implements IDepartmentsRepository {
   
   public async create({ id, company_id, department_number, name, description }: ICreateDepartmentDTO): Promise<Department> {
 
-      const appointment = this.ormRepository.create({
+      const department = this.ormRepository.create({
         id,
         company_id,
         department_number,
@@ -22,9 +22,9 @@ class DepartmentsRepository implements IDepartmentsRepository {
         description
       })
 
-      await this.ormRepository.save(appointment);
+      await this.ormRepository.save(department);
 
-      return appointment;
+      return department;
   }
 
   public async findByName(name: string, company_id: string): Promise<Department | null> {

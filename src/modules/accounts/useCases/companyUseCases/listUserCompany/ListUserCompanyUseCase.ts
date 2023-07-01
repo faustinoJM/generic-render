@@ -1,9 +1,9 @@
 import { inject, injectable } from "tsyringe";
-import { ICreateUserDTO } from "../../dtos/ICreateUserDTO";
-import { IUsersRepository } from "../../repositories/IUsersRepository";
+import { ICreateUserDTO } from "../../../dtos/ICreateUserDTO";
+import { IUsersRepository } from "../../../repositories/IUsersRepository";
 import { hash } from "bcryptjs";
-import AppError  from "../../../../shared/errors/AppError";
-import ICompanyRepository from "../../../company/repositories/ICompanyRepository";
+import AppError  from "../../../../../shared/errors/AppError";
+import ICompanyRepository from "../../../../company/repositories/ICompanyRepository";
 
 
 // interface IRequest {

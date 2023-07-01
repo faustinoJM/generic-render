@@ -5,7 +5,7 @@ import IDepartmentsRepository from '../../../repositories/IDepartmentsRepository
 import Department from '../entities/Department';
 
 
-class DepartmentsRepository implements IDepartmentsRepository {
+class CategoryRepository implements IDepartmentsRepository {
   private ormRepository: Repository<Department>;
 
   constructor() {
@@ -14,16 +14,16 @@ class DepartmentsRepository implements IDepartmentsRepository {
   
   public async create({ id, company_id, department_id, name }: ICreateDepartmentDTO): Promise<Department> {
 
-      const appointment = this.ormRepository.create({
+      const department = this.ormRepository.create({
         id,
         company_id,
         department_id,
         name
       })
 
-      await this.ormRepository.save(appointment);
+      await this.ormRepository.save(department);
 
-      return appointment;
+      return department;
   }
 
   public async findByName(name: string, company_id: string): Promise<Department | null> {
@@ -61,4 +61,4 @@ class DepartmentsRepository implements IDepartmentsRepository {
   }
 }
 
-export default DepartmentsRepository
+export default CategoryRepository
