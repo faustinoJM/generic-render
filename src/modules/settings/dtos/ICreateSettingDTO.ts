@@ -42,7 +42,8 @@ export default interface ICreateSettingDTO {
   column_subsidy_vacation?: string
   column_salary_thirteenth?: string
   column_salary_fourteenth?: string
-  payslip_comment?: string
+  payslip_comment?: string;
+  payslip_type?: number;
   language_options?: string;
   column_loan?: string;
   flag?: number;

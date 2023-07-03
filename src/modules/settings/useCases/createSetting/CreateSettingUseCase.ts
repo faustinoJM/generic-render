@@ -88,6 +88,7 @@ class CreateSettingUseCase {
               column_salary_thirteenth: data.column_salary_thirteenth,
               column_salary_fourteenth: data.column_salary_fourteenth,
               payslip_comment: data.payslip_comment,
+              payslip_type: data.payslip_type,
               language_options: data.language_options,  
               column_loan: data.column_loan,            
               flag: data.flag,
@@ -120,6 +121,7 @@ class CreateSettingUseCase {
             data.column_salary_thirteenth = data.column_salary_thirteenth ?? "false"
             data.column_salary_fourteenth = data.column_salary_fourteenth ?? "false"
             data.column_loan = data.column_loan ?? "false"
+            data.payslip_type = data.payslip_type ?? 1
           await this.settingRepository.create(data);
         }
 

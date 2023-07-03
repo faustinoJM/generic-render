@@ -222,6 +222,11 @@ export class CreateSettings1680599503894 implements MigrationInterface {
             isNullable: true,
           },
           {
+            name: "payslip_type",
+            type: "int",
+            isNullable: true,
+          },
+          {
             name: "column_loan",
             type: "varchar",
             isNullable: true,

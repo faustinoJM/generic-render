@@ -112,9 +112,6 @@ class Setting {
   column_subsidy_transport: string
 
   @Column()
-  payslip_comment: string
-
-  @Column()
   column_subsidy_food: string
 
   @Column()
@@ -131,6 +128,12 @@ class Setting {
 
   @Column()
   column_salary_fourteenth: string
+
+  @Column()
+  payslip_comment: string
+
+  @Column()
+  payslip_type: number
 
   @Column()
   column_loan: string;
