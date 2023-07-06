@@ -1,6 +1,5 @@
 import { IPayrollDemo, ISalario } from "../useCases/createPayroll/CreatePayrollEmployeeUseCase";
 
-
 interface ICreatePayrollEmployeeDTO {
   id?: string;
   employee_id?: string;
@@ -12,6 +11,7 @@ interface ICreatePayrollEmployeeDTO {
   department_name?: string;
   bank_name?: string;
   bank_account?: number;
+  start_date?: Date;
   nib?: number;
   social_security?: number;
   nuit?: number;
@@ -41,6 +41,12 @@ interface ICreatePayrollEmployeeDTO {
   subsidy_medical?: string;
   subsidy_vacation?: string;
   subsidy_shift?: string;
+  subsidy_night?: string;
+  subsidy_risk?: string;
+  subsidy_attendance?: string;
+  subsidy_performance?: string;
+  subsidy_leadership?: string;
+  subsidy_commission?: string;
   salary_thirteenth?: string;
   salary_fourteenth?: string;
   irps?:  string;

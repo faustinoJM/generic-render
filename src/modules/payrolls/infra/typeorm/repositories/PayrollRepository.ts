@@ -1,7 +1,6 @@
 import { Repository } from "typeorm";
 import { AppDataSource } from "../../../../../shared/infra/typeorm";
 import { ICreatePayrollDTO } from "../../../dtos/ICreatePayrollDTO";
-import { ICreatePayrollDTO2 } from "../../../dtos/ICreatePayrollDTO2";
 import { IPayrollRepository } from "../../../repositories/IPayrollRepository";
 import { Payroll } from "../entities/Payroll";
 

@@ -23,12 +23,21 @@ class InputPayrollEmployeeController {
           subsidy_medical,
           subsidy_vacation,
           subsidy_shift,
+          subsidy_night,
+          subsidy_risk,
+          subsidy_attendance,
+          subsidy_performance,
+          subsidy_leadership,
+          subsidy_commission,
           salary_thirteenth,
           salary_fourteenth,
           syndicate_employee,
           ipa_employee,
+          employee_loan,
+          loan_deduction,
           inss_event, 
-          inss_event_date} = request.body;
+          inss_event_date,
+          } = request.body;
           const id = request.params.id;
 
 
@@ -52,12 +61,20 @@ class InputPayrollEmployeeController {
           subsidy_medical,
           subsidy_vacation,
           subsidy_shift,
+          subsidy_night,
+          subsidy_risk,
+          subsidy_attendance,
+          subsidy_performance,
+          subsidy_leadership,
+          subsidy_commission,
           salary_thirteenth,
           salary_fourteenth,
           syndicate_employee,
           ipa_employee,
-          inss_event,
-          inss_event_date})
+          employee_loan,
+          loan_deduction,
+          inss_event, 
+          inss_event_date,})
 
         return response.json(payrolls);
     }

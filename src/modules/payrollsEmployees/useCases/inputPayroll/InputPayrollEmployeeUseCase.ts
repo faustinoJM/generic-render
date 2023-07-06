@@ -10,6 +10,8 @@ import { IPayrollRepository } from "../../../payrolls/repositories/IPayrollRepos
 import ISettingRepository from "../../../settings/repositories/ISettingRepository";
 import { NumValues } from "aws-sdk/clients/amplifyuibuilder";
 import { IDateProvider } from "../../../../shared/container/provider/DateProvider/IDateProvider";
+import { Employee } from "../../../employees/infra/typeorm/entities/Employee";
+import { ICreateEmployeeDTO } from "../../../employees/dtos/ICreateEmployeeDTO";
 
 export interface ISalario {
   salarioLiquido?: number;
@@ -69,11 +71,19 @@ interface IRequestList {
   subsidy_residence?: number;
   subsidy_medical?: number;
   subsidy_vacation?: number;
-  subsidy_shift?: number
+  subsidy_shift?: number;
+  subsidy_night?: number;
+  subsidy_risk?: number;
+  subsidy_attendance?: number;
+  subsidy_performance?: number;
+  subsidy_leadership?: number;
+  subsidy_commission?: number;
   salary_thirteenth?: number;
   salary_fourteenth?: number,
   inss_event?: number;
   inss_event_date?: Date;
+  employee_loan?: number;
+  loan_deduction?: number;
 }
 
 
@@ -110,10 +120,24 @@ class InputPayrollEmployeeUseCase {
                     subsidy_residence,
                     subsidy_medical,
                     subsidy_vacation,
+                    subsidy_shift,
+                    subsidy_night,
+                    subsidy_risk,
+                    subsidy_attendance,
+                    subsidy_performance,
+                    subsidy_leadership,
+                    subsidy_commission,
                     salary_thirteenth,
+                    salary_fourteenth,
+                    ipa_employee,
                     inss_event,
                     inss_event_date,
+                    employee_loan,
+                    loan_deduction,
                     }: IRequestList) {
+                      
+ 
+
 
         const user = await this.userRepository.findById(user_id as any)
 
@@ -183,8 +207,17 @@ class InputPayrollEmployeeUseCase {
         subsidy_residence! >= 0 ? subsidy_residence = subsidy_residence : subsidy_residence = +payrollEmployee.subsidy_residence;
         subsidy_medical! >= 0 ? subsidy_medical = subsidy_medical : subsidy_medical = +payrollEmployee.subsidy_medical;
         subsidy_vacation! >= 0 ? subsidy_vacation = subsidy_vacation : subsidy_vacation = +payrollEmployee.subsidy_vacation;
+        subsidy_shift! >= 0 ? subsidy_shift = subsidy_shift : subsidy_shift = +payrollEmployee.subsidy_shift;
+        subsidy_night! >= 0 ? subsidy_night = subsidy_night : subsidy_night = +payrollEmployee.subsidy_night;
+        subsidy_risk! >= 0 ? subsidy_risk = subsidy_risk : subsidy_risk = +payrollEmployee.subsidy_risk;
+        subsidy_attendance! >= 0 ? subsidy_attendance = subsidy_attendance : subsidy_attendance = +payrollEmployee.subsidy_attendance;
+        subsidy_performance! >= 0 ? subsidy_performance = subsidy_performance : subsidy_performance = +payrollEmployee.subsidy_performance;
+        subsidy_leadership! >= 0 ? subsidy_leadership = subsidy_leadership : subsidy_leadership = +payrollEmployee.subsidy_leadership;
+        subsidy_commission! >= 0 ? subsidy_commission = subsidy_commission : subsidy_commission = +payrollEmployee.subsidy_commission;
         salary_thirteenth! >= 0 ? salary_thirteenth = salary_thirteenth : salary_thirteenth = +payrollEmployee.salary_thirteenth;
-  
+        salary_fourteenth! >= 0 ? salary_fourteenth = salary_fourteenth : salary_fourteenth = +payrollEmployee.salary_fourteenth;
+        ipa_employee! >= 0 ? ipa_employee = ipa_employee : ipa_employee = +payrollEmployee.ipa_employee;
+ 
         const syndicate_tax = settings?.payroll_syndicate_tax ?? 1;
 
         if(employees.length <= 0) {
@@ -202,19 +235,22 @@ class InputPayrollEmployeeUseCase {
         const employee =  employees.find(employee => employee.id === payrollEmployee.employee_id)
           // console.log(employee)
         if(employee) {
-
           let base_day = calcSalarioEmDias(+payrollEmployee.month_total_workdays, +employee.salary)
           let base_hour = calcSalarioPorHora(base_day, +payrollEmployee.day_total_workhours)
           let total_overtime = calcTotalHorasExtras(base_hour, overtime50!, overtime100!)
           let total_absences = calcTotalFaltas(absences!, base_day)
-          let total_subsidy = (+subsidy!) + (+subsidy_transport!) + (+subsidy_food!) + (+subsidy_residence!) + (+subsidy_medical!) + (+subsidy_vacation!)
-          let total_income = +calcularSalarioBruto(+employee.salary, total_overtime!, total_absences, +backpay!, +bonus!, total_subsidy, salary_thirteenth!).toFixed(2)
+          let total_subsidy = ((subsidy)! + (subsidy_transport!) + (subsidy_food!) + (subsidy_residence!) + 
+                            (subsidy_medical!) + (subsidy_vacation!) + (subsidy_shift!) + (subsidy_night!) +
+                             (subsidy_risk!) + (subsidy_attendance!) + (subsidy_performance!) + (subsidy_leadership!) + 
+                              (subsidy_commission!));
+          // let total_subsidy = (+subsidy!) + (+subsidy_transport!) + (+subsidy_food!) + (+subsidy_residence!) + (+subsidy_medical!) + (+subsidy_vacation!)
+          let total_income = +calcularSalarioBruto(+employee.salary, total_overtime!, total_absences, +backpay!, +bonus!, total_subsidy, salary_thirteenth!)
           let IRPS = retornarIRPS(+total_income!, employee.dependents) 
           let INSS_Employee = retornarINSS_Employee(+total_income!, employee.inss_status)
           let INSS_Company = retornarINSS_Company(+total_income, employee.inss_status)
-          let syndicate_employee = retornarSyndicate_Tax(total_income, syndicate_tax, employee.syndicate_status)
-          let salary_liquid = calcularSalarioLiquido(+total_income!, IRPS, INSS_Employee, +cash_advances!, syndicate_employee)
-         
+          let syndicate_employee = retornarSyndicate_Tax(+total_income.toFixed(2), syndicate_tax, employee.syndicate_status)
+          let salary_liquid = calcularSalarioLiquido(+total_income!, IRPS, INSS_Employee, +cash_advances!, syndicate_employee, ipa_employee!, +payrollEmployee.loan_deduction)
+
           let employeePayroll: ICreatePayrollEmployeeDTO = {
             id: payrollEmployee.id,
             payroll_id: payrollEmployee.payroll_id,
@@ -249,12 +285,23 @@ class InputPayrollEmployeeUseCase {
             inss_company: INSS_Company as any,
             total_inss: (INSS_Employee + INSS_Company) as any,
             syndicate_employee: syndicate_employee as any,
+            ipa_employee: ipa_employee as any,
             subsidy_transport: subsidy_transport as any,
             subsidy_food: subsidy_food as any,
             subsidy_residence: subsidy_residence as any,
             subsidy_medical: subsidy_medical as any,
             subsidy_vacation: subsidy_vacation as any,
+            subsidy_shift: subsidy_shift as any,
+            subsidy_night: subsidy_night as any,
+            subsidy_risk: subsidy_risk as any,
+            subsidy_attendance: subsidy_attendance as any,
+            subsidy_performance: subsidy_performance as any,
+            subsidy_leadership: subsidy_leadership as any,
+            subsidy_commission: subsidy_commission as any,
             salary_thirteenth: salary_thirteenth as any,
+            salary_fourteenth: salary_fourteenth as any,
+            employee_loan: payrollEmployee.employee_loan,
+            loan_deduction: payrollEmployee.loan_deduction,
             inss_event: inss_event,
             // inss_event_date: new Date(Date.now()).toISOString() as any,
             tabelaSalario: retornarTabela(+total_income!, employee.dependents),
@@ -266,6 +313,13 @@ class InputPayrollEmployeeUseCase {
           //salvar no banco de dados
           this.payrollEmployeeRepository.create(employeePayroll).then().
           catch((err) => console.log(err))
+          if (employee.vacation > absences!)
+            employee.vacation = employee.vacation - absences!
+          else 
+            employee.vacation = 0
+          this.employeeRepository.create(employee).then().
+          catch((err) => console.log(err))
+          // console.log("78",employee)
           
           listEmployeesPayrolls.push(employeePayroll)
           console.log(listEmployeesPayrolls)
@@ -563,8 +617,8 @@ function calcularSalarioBruto(salario_base: number, totalHorasExtras: number,
   return salario_base + totalHorasExtras - totalDescontoFaltas + totalRetroativos + bonus + total_subsidio + salary_thirteenth;
 }
 
-function calcularSalarioLiquido(totalSalario: number, IRPS: number, INSS_Employee: number, totalAdiantamento: number, syndicate_employee: number) {
-  return totalSalario - IRPS - INSS_Employee - totalAdiantamento - syndicate_employee;
+function calcularSalarioLiquido(totalSalario: number, IRPS: number, INSS_Employee: number, totalAdiantamento: number, syndicate_employee: number, ipa_employee: number, employeeLoan: number) {
+  return totalSalario - IRPS - INSS_Employee - totalAdiantamento - syndicate_employee - ipa_employee - employeeLoan;
 }
 
 

@@ -2,13 +2,6 @@ import { inject, injectable } from "tsyringe";
 import AppError  from "../../../../shared/errors/AppError";
 import { IPayrollRepository } from "../../repositories/IPayrollRepository";
 import { IUsersRepository } from "../../../accounts/repositories/IUsersRepository";
-import { IPayrollEmployeeRepository } from "../../../payrollsEmployees/repositories/IPayrollEmployeeRepository";
-import { ICreatePayrollDTO2 } from "../../dtos/ICreatePayrollDTO2";
-import { IEmployeesRepository } from "../../../employees/repositories/IEmployeesRepository";
-import IPositionsRepository from "../../../positions/repositories/IPositionsRepository";
-import IDepartmentsRepository from "../../../category/repositories/IDepartmentsRepository";
-import ISettingRepository from "../../../settings/repositories/ISettingRepository";
-import { ICreatePayrollEmployeeDTO } from "../../../payrollsEmployees/dtos/ICreatePayrollEmployeeDTO";
 
 export interface ISalario {
   salarioLiquido?: number;

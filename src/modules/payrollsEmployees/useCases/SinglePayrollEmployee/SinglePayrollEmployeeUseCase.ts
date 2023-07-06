@@ -40,6 +40,20 @@ interface ICreatePayrollDTO2 {
   cash_advances?: string;
   backpay?: string;
   subsidy?: string;
+  subsidy_transport?: string;
+  subsidy_food?: string;
+  subsidy_residence?: string;
+  subsidy_medical?: string;
+  subsidy_vacation?: string;
+  subsidy_shift?: string;
+  subsidy_night?: string;
+  subsidy_risk?: string;
+  subsidy_attendance?: string;
+  subsidy_performance?: string;
+  subsidy_leadership?: string;
+  subsidy_commission?: string;
+  salary_thirteenth?: string;
+  salary_fourteenth?: string;
   bonus?: string;
   irps?:  string;
   inss?: string;
@@ -48,7 +62,12 @@ interface ICreatePayrollDTO2 {
   total_inss?: string
   total_income?: string;
   syndicate_employee?: string;
-
+  ipa_employee?: string;
+  employee_loan?: string;
+  loan_deduction?: string;
+  start_date?: Date;
+  inss_event?: number
+  inss_event_date?: Date;
 }
 
 
@@ -126,6 +145,20 @@ class SinglePayrollEmployeeUseCase {
             total_absences: payroll.total_absences as any,
             cash_advances: payroll.cash_advances,
             subsidy: payroll.subsidy,
+            subsidy_transport: payroll.subsidy_transport,
+            subsidy_food: payroll.subsidy_food,
+            subsidy_residence: payroll.subsidy_residence,
+            subsidy_medical: payroll.subsidy_medical,
+            subsidy_vacation: payroll.subsidy_vacation,
+            subsidy_shift: payroll.subsidy_shift,
+            subsidy_night: payroll.subsidy_night,
+            subsidy_risk: payroll.subsidy_risk,
+            subsidy_attendance: payroll.subsidy_attendance,
+            subsidy_performance: payroll.subsidy_performance,
+            subsidy_leadership: payroll.subsidy_leadership,
+            subsidy_commission: payroll.subsidy_commission,
+            salary_thirteenth: payroll.salary_thirteenth,
+            salary_fourteenth: payroll.salary_fourteenth,
             bonus: payroll.bonus,
             backpay: payroll.backpay,
             irps: payroll.irps,
@@ -133,6 +166,12 @@ class SinglePayrollEmployeeUseCase {
             inss_company: payroll.inss_company,
             total_inss: ((+payroll.inss_employee) + (+payroll.inss_company)) as any,
             syndicate_employee: payroll.syndicate_employee,
+            ipa_employee: payroll.ipa_employee,
+            employee_loan: payroll.employee_loan,
+            loan_deduction: payroll.loan_deduction,
+            start_date: employee.start_date,
+            inss_event: payroll.inss_event,
+            inss_event_date: payroll.inss_event_date
           };
           
         return employeePayroll;
@@ -169,6 +208,20 @@ class SinglePayrollEmployeeUseCase {
           total_absences: payroll.total_absences as any,
           cash_advances: payroll.cash_advances,
           subsidy: payroll.subsidy,
+          subsidy_transport: payroll.subsidy_transport,
+          subsidy_food: payroll.subsidy_food,
+          subsidy_residence: payroll.subsidy_residence,
+          subsidy_medical: payroll.subsidy_medical,
+          subsidy_vacation: payroll.subsidy_vacation,
+          subsidy_shift: payroll.subsidy_shift,
+          subsidy_night: payroll.subsidy_night,
+          subsidy_risk: payroll.subsidy_risk,
+          subsidy_attendance: payroll.subsidy_attendance,
+          subsidy_performance: payroll.subsidy_performance,
+          subsidy_leadership: payroll.subsidy_leadership,
+          subsidy_commission: payroll.subsidy_commission,
+          salary_thirteenth: payroll.salary_thirteenth,
+          salary_fourteenth: payroll.salary_fourteenth,
           bonus: payroll.bonus,
           backpay: payroll.backpay,
           irps: payroll.irps,
@@ -176,6 +229,12 @@ class SinglePayrollEmployeeUseCase {
           inss_company: payroll.inss_company,
           total_inss: ((+payroll.inss_employee) + (+payroll.inss_company)) as any,
           syndicate_employee: payroll.syndicate_employee,
+          ipa_employee: payroll.ipa_employee,
+          employee_loan: payroll.employee_loan,
+          loan_deduction: payroll.loan_deduction,
+          start_date: undefined,
+          inss_event: payroll.inss_event,
+          inss_event_date: payroll.inss_event_date
           
         };
       return employeePayroll;

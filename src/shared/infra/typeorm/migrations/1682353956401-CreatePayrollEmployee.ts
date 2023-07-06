@@ -155,6 +155,36 @@ export class CreatePayrollEmployee1682353956401 implements MigrationInterface {
             isNullable: true,
           },
           {
+            name: "subsidy_night",
+            type: "double precision",
+            isNullable: true,
+          },
+          {
+            name: "subsidy_risk",
+            type: "double precision",
+            isNullable: true,
+          },
+          {
+            name: "subsidy_attendance",
+            type: "double precision",
+            isNullable: true,
+          },
+          {
+            name: "subsidy_performance",
+            type: "double precision",
+            isNullable: true,
+          },
+          {
+            name: "subsidy_leadership",
+            type: "double precision",
+            isNullable: true,
+          },
+          {
+            name: "subsidy_commission",
+            type: "double precision",
+            isNullable: true,
+          },
+          {
             name: "salary_thirteenth",
             type: "double precision",
             isNullable: true,

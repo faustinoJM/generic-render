@@ -81,6 +81,24 @@ class Employee {
     subsidy_shift: string
 
     @Column()
+    subsidy_night: string;
+
+    @Column()
+    subsidy_risk: string;
+
+    @Column()
+    subsidy_attendance: string;
+
+    @Column()
+    subsidy_performance: string;
+
+    @Column()
+    subsidy_leadership: string;
+
+    @Column()
+    subsidy_commission: string;
+
+    @Column()
     salary_thirteenth: string;
 
     @Column()

@@ -46,6 +46,14 @@ export default interface ICreateSettingDTO {
   payslip_type?: number;
   language_options?: string;
   column_loan?: string;
+  column_ipa_employee?: string;
+  column_subsidy_shift?: string;
+  column_subsidy_night?: string;
+  column_subsidy_risk?: string;
+  column_subsidy_attendance?: string;
+  column_subsidy_performance?: string;
+  column_subsidy_leadership?: string;
+  column_subsidy_commission?: string;
   flag?: number;
   company_logo_multer?: string[];
   CompanyLogoURL?: string;

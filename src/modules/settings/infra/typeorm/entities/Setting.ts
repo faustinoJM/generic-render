@@ -109,6 +109,9 @@ class Setting {
   column_syndicate: string
 
   @Column()
+  column_ipa_employee: string;
+
+  @Column()
   column_subsidy_transport: string
 
   @Column()
@@ -122,6 +125,30 @@ class Setting {
 
   @Column()
   column_subsidy_vacation: string
+  
+  @Column()
+  column_subsidy_shift: string;
+
+  @Column()
+  column_subsidy_night: string;
+
+  @Column()
+  column_subsidy_risk: string;
+
+  @Column()
+  column_subsidy_attendance: string;
+
+  @Column()
+  column_subsidy_performance: string;
+
+  @Column()
+  column_subsidy_leadership: string;
+
+  @Column()
+  column_subsidy_commission: string;
+
+  @Column()
+  column_loan: string;
 
   @Column()
   column_salary_thirteenth: string
@@ -134,9 +161,6 @@ class Setting {
 
   @Column()
   payslip_type: number
-
-  @Column()
-  column_loan: string;
 
   @Column()
   language_options: string

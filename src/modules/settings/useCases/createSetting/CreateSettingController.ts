@@ -58,6 +58,14 @@ class CreateSettingController {
           payslip_type,
           language_options,
           column_loan,
+          column_ipa_employee,
+          column_subsidy_shift,
+          column_subsidy_night,
+          column_subsidy_risk,
+          column_subsidy_attendance,
+          column_subsidy_performance,
+          column_subsidy_leadership,
+          column_subsidy_commission,
           flag,
         } = request.body;
 
@@ -114,6 +122,14 @@ class CreateSettingController {
           payslip_type,
           language_options,
           column_loan,
+          column_ipa_employee,
+          column_subsidy_shift,
+          column_subsidy_night,
+          column_subsidy_risk,
+          column_subsidy_attendance,
+          column_subsidy_performance,
+          column_subsidy_leadership,
+          column_subsidy_commission,
           flag,
           company_logo_multer: filename
          })

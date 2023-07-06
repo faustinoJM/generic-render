@@ -29,7 +29,22 @@ class UpdateEmployeeController {
       social_security,
       employee_loan,
       loan_deduction,
-      syndicate_status, inss_status} = request.body;
+      syndicate_status, inss_status,
+      subsidy_transport,
+      subsidy_food,
+      subsidy_residence,
+      subsidy_medical,
+      subsidy_vacation,
+      subsidy_shift,
+      subsidy_night,
+      subsidy_risk,
+      subsidy_attendance,
+      subsidy_performance,
+      subsidy_leadership,
+      subsidy_commission,
+      salary_thirteenth,
+      ipa_employee,
+    } = request.body;
     const id = request.params.id;
 
     const updateEmployeeUseCase = container.resolve(UpdateEmployeeUseCase)
@@ -57,7 +72,22 @@ class UpdateEmployeeController {
       social_security, 
       employee_loan,
       loan_deduction,
-      syndicate_status, inss_status})
+      syndicate_status, inss_status,
+      subsidy_transport,
+      subsidy_food,
+      subsidy_residence,
+      subsidy_medical,
+      subsidy_vacation,
+      subsidy_shift,
+      subsidy_night,
+      subsidy_risk,
+      subsidy_attendance,
+      subsidy_performance,
+      subsidy_leadership,
+      subsidy_commission,
+      salary_thirteenth,
+      ipa_employee,
+    })
       // console.log("++++++++", employee)
 
     return response.status(204).json(employee)

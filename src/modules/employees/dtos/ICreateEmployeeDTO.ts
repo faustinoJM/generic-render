@@ -1,3 +1,6 @@
+import Department from "../../departments/infra/typeorm/entities/Department";
+import Position from "../../positions/infra/typeorm/entities/Position";
+
 interface ICreateEmployeeDTO {
   id?: string;
   employee_number?: number;
@@ -25,9 +28,15 @@ interface ICreateEmployeeDTO {
   subsidy_medical?: string;
   subsidy_vacation?: string;
   subsidy_shift?: string
+  subsidy_night?: string;
+  subsidy_risk?: string;
+  subsidy_attendance?: string;
+  subsidy_performance?: string;
+  subsidy_leadership?: string;
+  subsidy_commission?: string;
   salary_thirteenth?: string;
-  department?: string;
-  position?: string;
+  department?: Department;
+  position?: Position;
   start_date?: Date;
   employee_status?: string;
   bank_name?: string;

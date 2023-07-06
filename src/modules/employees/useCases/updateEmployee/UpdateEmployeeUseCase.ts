@@ -37,7 +37,21 @@ class UpdateEmployeeUseCase {
     social_security,
     employee_loan,
     loan_deduction,
-    syndicate_status, inss_status}: ICreateEmployeeDTO) {
+    syndicate_status, inss_status,
+    subsidy_transport,
+    subsidy_food,
+    subsidy_residence,
+    subsidy_medical,
+    subsidy_vacation,
+    subsidy_shift,
+    subsidy_night,
+    subsidy_risk,
+    subsidy_attendance,
+    subsidy_performance,
+    subsidy_leadership,
+    subsidy_commission,
+    salary_thirteenth,
+    ipa_employee,}: ICreateEmployeeDTO) {
 
     const user = await this.userRepository.findById(user_id as any)
 
@@ -76,7 +90,21 @@ class UpdateEmployeeUseCase {
       social_security,
       employee_loan,
       loan_deduction,
-      syndicate_status, inss_status
+      syndicate_status, inss_status,
+      subsidy_transport,
+      subsidy_food,
+      subsidy_residence,
+      subsidy_medical,
+      subsidy_vacation,
+      subsidy_shift,
+      subsidy_night,
+      subsidy_risk,
+      subsidy_attendance,
+      subsidy_performance,
+      subsidy_leadership,
+      subsidy_commission,
+      salary_thirteenth,
+      ipa_employee,
     })
 
     return employee;

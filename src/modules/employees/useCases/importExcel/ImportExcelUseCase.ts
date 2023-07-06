@@ -196,7 +196,7 @@ class ImportExcelUseCase {
           return (nome === Object.values(d)[0]) && (bi === Object.values(d)[4])
         })
 
-        console.log("alert", Object.values(d)[4], "/", Object.values(d)[0])
+        // console.log("alert", Object.values(d)[4], "/", Object.values(d)[0])
 
         dataEmployeeNameBi.push(`${Object.values(d)[0] as any}/${Object.values(d)[4] as any}`)
 
@@ -214,20 +214,41 @@ class ImportExcelUseCase {
             employee.company_id = user.company_id 
             employee.inss_status = employee.inss_status ?? "true";
             employee.syndicate_status = employee.syndicate_status ?? "false";
+            employee.subsidy = employee.subsidy ?? 0;
+            employee.subsidy_transport = employee.subsidy_transport ?? 0;
+            employee.subsidy_food = employee.subsidy_food ?? 0;
+            employee.subsidy_vacation = employee.subsidy_vacation ?? 0;
+            employee.subsidy_medical = employee.subsidy_medical ?? 0;
+            employee.subsidy_residence = employee.subsidy_residence ?? 0;
+            employee.subsidy_shift = employee.subsidy_shift ?? 0;
+            employee.subsidy_night = employee.subsidy_night ?? 0;
+            employee.subsidy_risk = employee.subsidy_risk ?? 0;
+            employee.subsidy_attendance = employee.subsidy_attendance ?? 0;
+            employee.subsidy_performance = employee.subsidy_performance ?? 0;
+            employee.subsidy_leadership = employee.subsidy_leadership ?? 0;
+            employee.subsidy_commission = employee.subsidy_commission ?? 0;
+            employee.employee_loan = employee.employee_loan ?? 0;
+            employee.loan_deduction = employee.loan_deduction ?? 0;
+            employee.ipa_employee = employee.ipa_employee ?? 0;
+            // employee.start_date = employee.start_date ?? new Date()
             // console.log("794", employee.start_date)
-            employee.vacation = this.dayjsDateProvider.compareInDays(new Date(), new Date(employee.start_date))
+            if (employee.start_date)
+              employee.vacation = this.dayjsDateProvider.compareInDays(new Date(), new Date(employee.start_date))
             // console.log("794 Total", employee.vacation)
 
-            if (employee.vacation < 730)
+            if (employee.vacation <= 365)
               employee.vacation = 12
-            else if (employee.vacation < 1095)
+            else if (employee.vacation <= 730)
               employee.vacation = 24
-            else if (employee.vacation >= 1095)
+            else if (employee.vacation > 730)
               employee.vacation = 30
             else
               employee.vacation = 0
 
             try {
+              console.log("1122", employee)
+              console.log("23203",employee.start_date)
+              console.log("23205",employee.birth_date)
               await this.employeeRepository.create(employee)
             } catch(err){
               console.log(err)
@@ -247,7 +268,40 @@ class ImportExcelUseCase {
             employee.company_id = user.company_id ;
             employee.inss_status = employee.inss_status ?? "true";
             employee.syndicate_status = employee.syndicate_status ?? "false";
+            employee.subsidy = employee.subsidy ?? employeeRepo.subsidy;
+            employee.subsidy_transport = employee.subsidy_transport ?? employeeRepo.subsidy_transport;
+            employee.subsidy_food = employee.subsidy_food ?? employeeRepo.subsidy_food;
+            employee.subsidy_vacation = employee.subsidy_vacation ?? employeeRepo.subsidy_vacation;
+            employee.subsidy_medical = employee.subsidy_medical ?? employeeRepo.subsidy_medical;
+            employee.subsidy_residence = employee.subsidy_residence ?? employeeRepo.subsidy_residence;
+            employee.subsidy_shift = employee.subsidy_shift ?? employeeRepo.subsidy_shift
+            employee.subsidy_night = employee.subsidy_night ?? employeeRepo.subsidy_night;
+            employee.subsidy_risk = employee.subsidy_risk ?? employeeRepo.subsidy_risk;
+            employee.subsidy_attendance = employee.subsidy_attendance ?? employeeRepo.subsidy_attendance;
+            employee.subsidy_performance = employee.subsidy_performance ?? employeeRepo.subsidy_performance;
+            employee.subsidy_leadership = employee.subsidy_leadership ?? employeeRepo.subsidy_leadership;
+            employee.subsidy_commission = employee.subsidy_commission ?? employeeRepo.subsidy_commission;
+            employee.employee_loan = employee.employee_loan ?? employeeRepo.employee_loan;
+            employee.loan_deduction = employee.loan_deduction ?? employeeRepo.loan_deduction;
+            employee.ipa_employee = employee.ipa_employee ?? employeeRepo.ipa_employee;
+            // employee.start_date = employee.start_date ?? new Date()
+
+            if (employee.start_date)
+              employee.vacation = this.dayjsDateProvider.compareInDays(new Date(), new Date(employee.start_date))
+
+            if (employee.vacation <= 365)
+              employee.vacation = 12
+            else if (employee.vacation <= 730)
+              employee.vacation = 24
+            else if (employee.vacation > 730)
+              employee.vacation = 30
+            else
+              employee.vacation = 0
+              
             try {
+              console.log("1122", employee)
+              console.log("23203",employee.start_date)
+              console.log("23205",employee.birth_date)
               await this.employeeRepository.create(employee)
             } catch(err){
               console.log(err)

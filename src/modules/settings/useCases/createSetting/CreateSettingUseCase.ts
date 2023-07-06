@@ -85,6 +85,14 @@ class CreateSettingUseCase {
               column_subsidy_residence: data.column_subsidy_residence,
               column_subsidy_medical: data.column_subsidy_medical,
               column_subsidy_vacation: data.column_subsidy_vacation,
+              column_ipa_employee: data.column_ipa_employee,
+              column_subsidy_shift: data.column_subsidy_shift,
+              column_subsidy_night: data.column_subsidy_night,
+              column_subsidy_risk: data.column_subsidy_risk,
+              column_subsidy_attendance: data.column_subsidy_attendance,
+              column_subsidy_performance: data.column_subsidy_performance,
+              column_subsidy_leadership: data.column_subsidy_leadership,
+              column_subsidy_commission: data.column_subsidy_commission,
               column_salary_thirteenth: data.column_salary_thirteenth,
               column_salary_fourteenth: data.column_salary_fourteenth,
               payslip_comment: data.payslip_comment,
@@ -112,7 +120,7 @@ class CreateSettingUseCase {
             data.column_bonus =  data.column_bonus ?? "true"
             data.column_backpay =  data.column_backpay ?? "true"
             data.column_subsidy =  data.column_subsidy ?? "true"
-            data.column_syndicate =  data.column_syndicate ?? "true"
+            data.column_syndicate =  data.column_syndicate ?? "false"
             data.column_subsidy_transport = data.column_subsidy_transport ?? "false"
             data.column_subsidy_food = data.column_subsidy_food ?? "false"
             data.column_subsidy_residence = data.column_subsidy_residence ?? "false"
@@ -120,6 +128,14 @@ class CreateSettingUseCase {
             data.column_subsidy_vacation = data.column_subsidy_vacation ?? "false"
             data.column_salary_thirteenth = data.column_salary_thirteenth ?? "false"
             data.column_salary_fourteenth = data.column_salary_fourteenth ?? "false"
+            data.column_ipa_employee = data.column_ipa_employee ?? "false",
+            data.column_subsidy_shift = data.column_subsidy_shift ?? "false",
+            data.column_subsidy_night = data.column_subsidy_night ?? "false",
+            data.column_subsidy_risk = data.column_subsidy_risk ?? "false",
+            data.column_subsidy_attendance = data.column_subsidy_attendance ?? "false",
+            data.column_subsidy_performance = data.column_subsidy_performance ?? "false",
+            data.column_subsidy_leadership = data.column_subsidy_leadership ?? "false",
+            data.column_subsidy_commission = data.column_subsidy_commission ?? "false",
             data.column_loan = data.column_loan ?? "false"
             data.payslip_type = data.payslip_type ?? 1
           await this.settingRepository.create(data);

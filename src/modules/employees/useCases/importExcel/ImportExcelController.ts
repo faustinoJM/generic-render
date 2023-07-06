@@ -14,7 +14,7 @@ class ImportExcelController {
 
         const payroll = await importExcelUseCase.execute(user_id, data)
 
-      return response.status(201).json("mau");
+      return response.status(201).json("Success");
     }
 }
 

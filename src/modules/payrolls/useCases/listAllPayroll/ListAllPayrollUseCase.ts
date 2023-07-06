@@ -2,7 +2,6 @@ import { inject, injectable } from "tsyringe";
 import AppError  from "../../../../shared/errors/AppError";
 import { IPayrollRepository } from "../../repositories/IPayrollRepository";
 import { IUsersRepository } from "../../../accounts/repositories/IUsersRepository";
-import { IEmployeesRepository } from "../../../employees/repositories/IEmployeesRepository";
 import { IPayrollEmployeeRepository } from "../../../payrollsEmployees/repositories/IPayrollEmployeeRepository";
 
 @injectable()
