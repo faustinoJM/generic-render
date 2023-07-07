@@ -345,5 +345,13 @@ const keyToPropMap = {
   "NIB": "nib",
   "Numero de Seg. Social": "social_security",
   "Emprestimo": "employee_loan",
-  "Deducao": "loan_deduction"
+  "Deducao": "loan_deduction",
+  "Turno": "subsidy_shift",
+  "Risco": "subsidy_risk",
+  "Alimentacao": "subsidy_food",
+  "Assiduidade": "subsidy_attendance",
+  "Desempenho": "subsidy_performance",
+  "Chefia": "subsidy_leadership",
+  "Residenciaa": "subsidy_residence",
+  "Comissao": "subsidy_commission",
 };

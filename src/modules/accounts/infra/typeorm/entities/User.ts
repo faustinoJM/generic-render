@@ -26,6 +26,8 @@ class User {
 
     company_name: string;
 
+    total_employee: number
+
     @CreateDateColumn()
     created_at: Date
 
